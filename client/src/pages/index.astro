@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import fetchApi from '../lib/strapi';
+const pageTitle = "Home Page";
+const restaurants = await fetchApi({
+  endpoint: "restaurants",
+  wrappedByKey: "data",
+ query: {
+    populate: ["categories"], 
+    
+  },
+});
+console.log(restaurants)
+
+---
+<BaseLayout pageTitle={pageTitle}>
+  <h2>Check Netlify-test4</h2>
+
+<ul>
+  {restaurants.map((product) => (
+    <li> 
+      {product.attributes.name}
+      {product.attributes.description[0].children[0].text}
+     Category:
+      {product.attributes.categories.data.map((category) => (
+        <span> -{category.attributes.name}</span>
+      ))}
+    </li>
+  ))}
+</ul>
+</BaseLayout>
