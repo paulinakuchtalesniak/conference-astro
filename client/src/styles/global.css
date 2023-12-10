@@ -70,6 +70,7 @@ h1 {
   justify-content: space-between;
   gap: 4rem;
   padding: 0 var(--space-l);
+  background-color: #fff6ee;
 }
 
 .nav-links {
@@ -84,17 +85,17 @@ h1 {
 }
 
 .logo {
-  margin-top: var(--space-l);
+  margin-top: var(--space-m);
   height: 5vh;
   width: 5vh;
 }
 .nav-links a {
   display: flex;
-  padding: 2rem 0 1rem 0;
+  padding:var(--space-s) var(--space-m);
   flex-direction: column;
   text-decoration: none;
-  font-size: var(--step-1);
-  font-weight: 500;
+  font-size: var(--step-0);
+  font-weight: 400;
   border-bottom: black solid 1px;
   width: 80%;
 }
@@ -133,11 +134,13 @@ h1 {
 
   .nav-links a {
     display: inline-block;
-    padding: 0;
+    padding: var(--space-2xs);
     flex-direction: row;
     text-decoration: none;
     border: none;
     width: auto;
+    color:  #ea6967;
+    font-family: "Bricolage Grotesque", sans-serif;
   }
   .hamburger {
     display: none;
