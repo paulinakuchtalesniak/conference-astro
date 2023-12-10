@@ -1,0 +1,137 @@
+---
+import '../styles/global.css';
+---  
+<style>
+    .conference-numbers{
+        display: grid;
+        margin-bottom: var( --space-2xl);
+
+    }
+    .conference-number__heading{
+        font-size:var(--step-4);
+        margin-top: var( --space-2xl);
+        padding: var( --space-l) var(--space-l);
+        text-align: center;
+        grid-row: 1;
+        grid-column: 1;
+        font-weight: 500;
+           color: rgb(162, 61, 61);
+
+    }
+.conference-number__wrapper{
+     grid-row: 2;
+     grid-column: 1;
+     justify-self: center;
+     width: 95%;
+       display: grid;
+  margin-top: var(--space-s);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: center;
+      gap: var(--space-m);
+}
+.conference-number__wrapper section {
+    display: grid;
+    grid-template-rows: 30vh auto;
+
+}
+.abstract-image{
+    grid-row: 1;
+    justify-self: center;
+    align-self: center;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+.stats__number{
+    font-size: calc(var(--step-5)*1.5);
+          transform:rotate(-45deg);
+          justify-self: center;
+          align-self: center;
+          grid-row: 1;
+          grid-column: 1;
+            color: #ffede7;
+    
+}
+.stats__description{
+    font-size: calc(var(--step-0) *1.2);
+    
+    justify-self: center;
+    align-self: flex-start;
+    text-transform: uppercase;
+     color: #d06c6a;
+      font-weight: 500;
+
+}
+
+.square {
+      animation: pulsate 15s infinite ease-in-out;
+       background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+    transform:rotate(45deg);
+  width:23vh;
+  height: 23vh;
+  background-image: radial-gradient(circle at center, 
+                                    #ef8c40e1 0%, /* First color */
+                                    #f5918ff6 20%, /* Second color */
+                                    #f6af97a5 40%, /* Third color */
+                                    #ecd3a827 100%); /* Fourth color with transparency */
+}
+
+
+
+@keyframes pulsate {
+  0%, 100% {
+    background-size: 100% 100%;
+    background-position: bottom;
+
+  }
+  25% {
+    background-size: 150% 150%;
+    background-position: center;
+  }
+  50% {
+    background-size: 150% 150%;
+    background-position: top;
+  }
+}
+
+
+
+</style>
+  
+  <section class="conference-numbers">
+    <h2 class="conference-number__heading">
+      What you can expect
+    </h2>
+    <div class="conference-number__wrapper">
+<section class="conference-number__speakers">
+  <div class="abstract-image square">
+ <p class="stats__number">17</p>
+  </div>
+ 
+    <p class="stats__description">speakers</p>
+</section>
+<section class="conference-number__workshops">
+    <div class="abstract-image square">
+  <p class="stats__number">8</p>
+  </div>
+
+    <p class="stats__description">interactive workshops</p>
+</section>
+<section class="conference-number__interactivity">
+      <div class="abstract-image square">
+  <p class="stats__number">4</p>
+  </div>
+
+    <p class="stats__description">meditation sessions</p>
+</section>
+<section class="conference-number__days">
+    <div class="abstract-image square">
+<p class="stats__number">3</p>
+  </div>
+
+    <p class="stats__description">unforgatable days</p>
+</section>
+    </div>
+  </section>

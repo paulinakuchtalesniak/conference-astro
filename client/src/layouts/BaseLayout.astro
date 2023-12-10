@@ -1,7 +1,7 @@
 ---
 
 import Navigation from '../components/Navigation.astro';
-import Header from '../components/Header.astro';
+
 import '../styles/reset.css';
 import '../styles/global.css';
 const { pageTitle } = Astro.props;
@@ -18,7 +18,7 @@ const { pageTitle } = Astro.props;
   </head>
   <body>
         <Navigation />
-        <Header />
+   
     <h1 class="visually-hidden">{pageTitle}</h1>
 
      <slot />
