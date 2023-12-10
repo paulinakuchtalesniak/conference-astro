@@ -677,12 +677,12 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiCategoryCategory extends Schema.CollectionType {
-  collectionName: 'categories';
+export interface ApiLocationLocation extends Schema.CollectionType {
+  collectionName: 'locations';
   info: {
-    singularName: 'category';
-    pluralName: 'categories';
-    displayName: 'Category';
+    singularName: 'location';
+    pluralName: 'locations';
+    displayName: 'Location';
     description: '';
   };
   options: {
@@ -690,22 +690,30 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String;
-    restaurants: Attribute.Relation<
-      'api::category.category',
+    adress: Attribute.String;
+    description: Attribute.Blocks;
+    coordinates: Attribute.String;
+    tickets: Attribute.Relation<
+      'api::location.location',
       'manyToMany',
-      'api::restaurant.restaurant'
+      'api::ticket.ticket'
+    >;
+    speakers: Attribute.Relation<
+      'api::location.location',
+      'oneToMany',
+      'api::speaker.speaker'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::category.category',
+      'api::location.location',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::category.category',
+      'api::location.location',
       'oneToOne',
       'admin::user'
     > &
@@ -713,35 +721,157 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
 }
 
-export interface ApiRestaurantRestaurant extends Schema.CollectionType {
-  collectionName: 'restaurants';
+export interface ApiSpeakerSpeaker extends Schema.CollectionType {
+  collectionName: 'speakers';
   info: {
-    singularName: 'restaurant';
-    pluralName: 'restaurants';
-    displayName: 'Restaurant';
+    singularName: 'speaker';
+    pluralName: 'speakers';
+    displayName: 'Speaker';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String & Attribute.Required;
-    description: Attribute.Blocks;
-    categories: Attribute.Relation<
-      'api::restaurant.restaurant',
+    name: Attribute.String;
+    surname: Attribute.String;
+    bio: Attribute.Blocks;
+    photo: Attribute.Media;
+    speech_tittle: Attribute.String;
+    speech_description: Attribute.Blocks;
+    date: Attribute.Date;
+    time: Attribute.Time;
+    speech_type: Attribute.Relation<
+      'api::speaker.speaker',
+      'manyToOne',
+      'api::speech-type.speech-type'
+    >;
+    tags: Attribute.Relation<
+      'api::speaker.speaker',
       'manyToMany',
-      'api::category.category'
+      'api::tag.tag'
+    >;
+    duration: Attribute.String;
+    location: Attribute.Relation<
+      'api::speaker.speaker',
+      'manyToOne',
+      'api::location.location'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::restaurant.restaurant',
+      'api::speaker.speaker',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::restaurant.restaurant',
+      'api::speaker.speaker',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSpeechTypeSpeechType extends Schema.CollectionType {
+  collectionName: 'speech_types';
+  info: {
+    singularName: 'speech-type';
+    pluralName: 'speech-types';
+    displayName: 'Speech_type';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    speech_type: Attribute.String;
+    speakers: Attribute.Relation<
+      'api::speech-type.speech-type',
+      'oneToMany',
+      'api::speaker.speaker'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::speech-type.speech-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::speech-type.speech-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTagTag extends Schema.CollectionType {
+  collectionName: 'tags';
+  info: {
+    singularName: 'tag';
+    pluralName: 'tags';
+    displayName: 'Tag';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    tag: Attribute.String;
+    speakers: Attribute.Relation<
+      'api::tag.tag',
+      'manyToMany',
+      'api::speaker.speaker'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTicketTicket extends Schema.CollectionType {
+  collectionName: 'tickets';
+  info: {
+    singularName: 'ticket';
+    pluralName: 'tickets';
+    displayName: 'Ticket';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.Enumeration<
+      ['pass - 1 day', 'pass - 2 days', 'pass - 3 days']
+    >;
+    price: Attribute.Decimal;
+    description: Attribute.Blocks;
+    locations: Attribute.Relation<
+      'api::ticket.ticket',
+      'manyToMany',
+      'api::location.location'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ticket.ticket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ticket.ticket',
       'oneToOne',
       'admin::user'
     > &
@@ -765,8 +895,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::category.category': ApiCategoryCategory;
-      'api::restaurant.restaurant': ApiRestaurantRestaurant;
+      'api::location.location': ApiLocationLocation;
+      'api::speaker.speaker': ApiSpeakerSpeaker;
+      'api::speech-type.speech-type': ApiSpeechTypeSpeechType;
+      'api::tag.tag': ApiTagTag;
+      'api::ticket.ticket': ApiTicketTicket;
     }
   }
 }

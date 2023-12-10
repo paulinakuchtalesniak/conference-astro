@@ -2,21 +2,23 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import fetchApi from '../lib/strapi';
 const pageTitle = "Home Page";
-const restaurants = await fetchApi({
-  endpoint: "restaurants",
+const speakers = await fetchApi({
+  endpoint: "speakers",
   wrappedByKey: "data",
  query: {
-    populate: ["categories"], 
+    populate: ["location"],
     
   },
 });
-console.log(restaurants)
+
+
+console.log(speakers[0].attributes.location.data.attributes.name)
 
 ---
 <BaseLayout pageTitle={pageTitle}>
   <h2>Check Netlify-test4</h2>
 
-<ul>
+<!-- <ul>
   {restaurants.map((product) => (
     <li> 
       {product.attributes.name}
@@ -27,5 +29,5 @@ console.log(restaurants)
       ))}
     </li>
   ))}
-</ul>
+</ul> -->
 </BaseLayout>

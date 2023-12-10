@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "categories",
+  "collectionName": "tags",
   "info": {
-    "singularName": "category",
-    "pluralName": "categories",
-    "displayName": "Category",
+    "singularName": "tag",
+    "pluralName": "tags",
+    "displayName": "Tag",
     "description": ""
   },
   "options": {
@@ -12,14 +12,14 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "tag": {
       "type": "string"
     },
-    "restaurants": {
+    "speakers": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::restaurant.restaurant",
-      "mappedBy": "categories"
+      "target": "api::speaker.speaker",
+      "inversedBy": "tags"
     }
   }
 }

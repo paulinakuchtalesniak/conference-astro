@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "locations",
+  "info": {
+    "singularName": "location",
+    "pluralName": "locations",
+    "displayName": "Location",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "adress": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "coordinates": {
+      "type": "string"
+    },
+    "tickets": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::ticket.ticket",
+      "inversedBy": "locations"
+    },
+    "speakers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::speaker.speaker",
+      "mappedBy": "location"
+    }
+  }
+}

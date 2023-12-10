@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tickets",
+  "info": {
+    "singularName": "ticket",
+    "pluralName": "tickets",
+    "displayName": "Ticket",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "enumeration",
+      "enum": [
+        "pass - 1 day",
+        "pass - 2 days",
+        "pass - 3 days"
+      ]
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "locations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::location.location",
+      "inversedBy": "tickets"
+    }
+  }
+}
