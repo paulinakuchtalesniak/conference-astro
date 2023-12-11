@@ -5,6 +5,13 @@ const { speakers } = Astro.props;
 const location1Speakers = speakers.filter(speaker => speaker.attributes.location.data.attributes.name === 'Copenhagen Wellness Center').slice(0, 4);
 const location2Speakers = speakers.filter(speaker => speaker.attributes.location.data.attributes.name === 'Oslo Aura Sanctuary').slice(0, 4);
 
+function formatTag(tag) {
+  return tag
+    .replace(/_/g, ' ')
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+}
 ---  
 <!-- speakers[0].attributes.location.data.attributes.name -->
 <div>
@@ -51,13 +58,21 @@ display: grid;
      background-color:#fff6ee50;
      padding: var(--space-2xs) var(--space-xs);
      border-radius:1rem;
-    color: #9e3617;
 
+
+  }
+  .speakers__tag a{
+
+   text-decoration:none;
+    color: #9e3617;
+  }
+  .hidden-element {
+    display: none;
   }
  
     </style>
  
-<ul class="speakers__cards-list">
+<ul class="speakers__cards-list speakers__cards-list--copenhagen">
   {location1Speakers.map(speaker => (
     <li class="speakers__card" data-speaker={speaker.attributes.name}>
 <img class="speakers__card-img" src={`${import.meta.env.STRAPI_URL}${speaker.attributes.photo.data[0].attributes.url}`} alt={`Photo of ${speaker.attributes.name}`} />
@@ -65,13 +80,32 @@ display: grid;
       <p class="speakers__card-title">{speaker.attributes.speech_tittle}</p>
          <ul class="speakers__list-tags">
         {speaker.attributes.tags.data.map(tag => (
-          <li class="speakers__tag">{tag.attributes.tag}</li>
+     
+          <li class="speakers__tag">   <a href={`/tags/${tag.attributes.tag}`}>{formatTag(tag.attributes.tag)}</a></li>
         ))}
       </ul>
      
     </li>
   ))}
 </ul>
-   
 
-</div>
+<ul class="speakers__cards-list speakers__cards-list--oslo hidden-element">
+  {location2Speakers.map(speaker => (
+    <li class="speakers__card" data-speaker={speaker.attributes.name}>
+<img class="speakers__card-img" src={`${import.meta.env.STRAPI_URL}${speaker.attributes.photo.data[0].attributes.url}`} alt={`Photo of ${speaker.attributes.name}`} />
+ <h3 class="speakers__card-data" >{speaker.attributes.name} {speaker.attributes.surname}</h3>
+      <p class="speakers__card-title">{speaker.attributes.speech_tittle}</p>
+         <ul class="speakers__list-tags">
+        {speaker.attributes.tags.data.map(tag => (
+     
+          <li class="speakers__tag">   <a href={`/tags/${tag.attributes.tag}`}>{formatTag(tag.attributes.tag)}</a></li>
+        ))}
+      </ul>
+     
+    </li>
+  ))}
+</ul>
+
+         <script>
+    import "../scripts/buttonSpeakers.js";
+  </script>

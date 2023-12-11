@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import fetchApi from "../../lib/strapi";
+
+export async function getStaticPaths() {
+  const tags = await fetchApi({
+    endpoint: "tags",
+    wrappedByKey: "data",
+  });
+
+
+  const paths = tags.map((tagSpeech, i) => ({
+    params: { id: tagSpeech.attributes.tag.toString() },
+    props: {
+     tagSpeech,
+    },
+  }));
+
+  return paths;
+}
+
+const { tagSpeech } = Astro.props;
+---
+
+<BaseLayout>
+  
+</BaseLayout>

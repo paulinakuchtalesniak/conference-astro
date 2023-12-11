@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Statistics from '../components/Statistics.astro';
 import SpeakerHeader from '../components/SpeakerHeader.astro';
+import Tickets from '../components/Tickets.astro';
 import '../styles/global.css';
 import fetchApi from '../lib/strapi';
 const pageTitle = "Home Page";
@@ -17,7 +18,15 @@ const speakers = await fetchApi({
   },
 
 });
-console.log(speakers[0].attributes.photo.data[0].attributes.url);
+const tickets = await fetchApi({
+  endpoint: "tickets",
+  wrappedByKey: "data",
+  query: {
+    populate: ["locations"],
+    
+  },
+});
+console.log(tickets[0].attributes.locations.data[0].attributes.name);
 ---
 
 <style>
@@ -112,4 +121,5 @@ The Aura Colors Conference offers a captivating three-day exploration of aura co
      </div>
     <SpeakerHeader speakers={speakers} />
 </section>
+  <Tickets tickets={tickets} />
 </BaseLayout>

@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+const { tickets } = Astro.props;
+
+---  
+<style>
+.tickets__list{
+    background-color: #ea6967;
+}
+</style>
+
+<ul class="tickets__list">
+  {tickets.map(ticket =>(
+    <li>
+<h3>{ticket.attributes.name}</h3>
+<p> {ticket.attributes.price}€</p>
+
+
+    <ul>
+      {ticket.attributes.description.map((descItem, descIndex) => (
+        <li>
+          {descItem.children.map((child, childIndex) => (
+            <span>{child.text}</span>
+          ))}
+        </li>
+      ))}
+    </ul>
+    <p> {ticket.attributes.locations.data[0].attributes.name}</p>
+
+ </li>
+  ))}
+
+</ul>
