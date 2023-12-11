@@ -1,0 +1,31 @@
+---
+import '../styles/global.css';
+const { speakers } = Astro.props;
+
+const location1Speakers = speakers.filter(speaker => speaker.attributes.location.data.attributes.name === 'Copenhagen Wellness Center').slice(0, 4);
+const location2Speakers = speakers.filter(speaker => speaker.attributes.location.data.attributes.name === 'Oslo Aura Sanctuary').slice(0, 4);
+
+---  
+<!-- speakers[0].attributes.location.data.attributes.name -->
+<div>
+
+ 
+<ul>
+  {location1Speakers.map(speaker => (
+    <li data-speaker={speaker.attributes.name}>
+      <h3>{speaker.attributes.name} {speaker.attributes.surname}</h3>
+<img src={`${import.meta.env.STRAPI_URL}${speaker.attributes.photo.data[0].attributes.url}`} alt={`Photo of ${speaker.attributes.name}`} />
+
+      <p>Speech Title: {speaker.attributes.speech_tittle}</p>
+         <ul>
+        {speaker.attributes.tags.data.map(tag => (
+          <li>{tag.attributes.tag}</li>
+        ))}
+      </ul>
+     
+    </li>
+  ))}
+</ul>
+  
+
+</div>

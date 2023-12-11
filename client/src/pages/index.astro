@@ -3,6 +3,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Statistics from '../components/Statistics.astro';
+import SpeakerHeader from '../components/SpeakerHeader.astro';
 import '../styles/global.css';
 import fetchApi from '../lib/strapi';
 const pageTitle = "Home Page";
@@ -10,8 +11,15 @@ const pageTitle = "Home Page";
 const speakers = await fetchApi({
   endpoint: "speakers",
   wrappedByKey: "data",
+   query: {
+    populate: ["photo","location", "tags"],
+    
+  },
 
 });
+// console.log(speakers);
+// console.log(speakers[0].attributes.bio[0].children[0].text);
+console.log(speakers[0].attributes.photo.data[0].attributes.url);
 ---
 
 <style>
@@ -88,7 +96,7 @@ The Aura Colors Conference offers a captivating three-day exploration of aura co
 </section>
 <section class="speakers">
   <h2 class="about-conference__heading">
-
   </h2>
+    <SpeakerHeader speakers={speakers} />
 </section>
 </BaseLayout>
