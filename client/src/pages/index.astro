@@ -17,8 +17,6 @@ const speakers = await fetchApi({
   },
 
 });
-// console.log(speakers);
-// console.log(speakers[0].attributes.bio[0].children[0].text);
 console.log(speakers[0].attributes.photo.data[0].attributes.url);
 ---
 
@@ -57,6 +55,15 @@ console.log(speakers[0].attributes.photo.data[0].attributes.url);
     font-size: var(--step-0);
     padding-right: var( --space-xl);
   }
+    .about-conference__heading{
+      text-align: center;
+      padding: var( --space-m) 0  var( --space-xl) 0;
+  }
+  .buttons-speakers__wrapper{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
     @media screen and (max-width: 900px) {
         .about-conference{
     margin-left: var( --space-m);
@@ -76,6 +83,7 @@ console.log(speakers[0].attributes.photo.data[0].attributes.url);
           margin-top: var(--space-m);
 
   }
+
 }
 
 
@@ -96,7 +104,12 @@ The Aura Colors Conference offers a captivating three-day exploration of aura co
 </section>
 <section class="speakers">
   <h2 class="about-conference__heading">
+    Meet the Speakers
   </h2>
+  <div class="buttons-speakers__wrapper">
+ <button class="button button__copenhagen button__active">Copenhagen</button>
+  <button class="button button__oslo">Oslo</button>
+     </div>
     <SpeakerHeader speakers={speakers} />
 </section>
 </BaseLayout>

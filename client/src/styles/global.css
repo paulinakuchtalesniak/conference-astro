@@ -72,6 +72,7 @@ h1 {
   gap: 4rem;
   padding: 0 var(--space-l);
   background-color: #fff6ee;
+
 }
 
 .nav-links {
@@ -120,7 +121,21 @@ h1 {
   background-color: #ff9776;
 }
 
+.button {
+  outline: none;
+  border: none;
+  font-size: var(--step-0);
+  padding: var(--space-xs) var(--space-m);
+  border-radius: 2rem;
+  background-color: #fcbbba;
+  color: #ea6967;
+  font-weight: 300;
+}
 
+.button__active{
+    background-color: #ea6967;
+  color: #fbdbd0;
+}
 
 @media screen and (min-width: 636px) {
   .nav-links {
@@ -148,5 +163,4 @@ h1 {
   .hamburger {
     display: none;
   }
-
 }
