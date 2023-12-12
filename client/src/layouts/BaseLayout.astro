@@ -1,7 +1,7 @@
 ---
 
 import Navigation from '../components/Navigation.astro';
-
+import Footer from '../components/Footer.astro';
 import '../styles/reset.css';
 import '../styles/global.css';
 const { pageTitle } = Astro.props;
@@ -22,6 +22,7 @@ const { pageTitle } = Astro.props;
     <h1 class="visually-hidden">{pageTitle}</h1>
 
      <slot />
+          <Footer />
          <script>
     import "../scripts/menu.js";
       import "../scripts/buttonSpeakers.js";

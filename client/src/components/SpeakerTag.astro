@@ -1,0 +1,27 @@
+---
+import '../styles/global.css';
+const { tagSpeech } = Astro.props;
+const speakersTag =tagSpeech.attributes.speakers.data
+// console.log(tagSpeech.attributes.speakers.data[0].attributes.speech_description[0].children[0].text);
+---  
+
+
+<ul >
+  {speakersTag.map(speaker => (
+    <li>
+        <p>{speaker.attributes.name} {speaker.attributes.surname}</p>
+        <p>{speaker.attributes.speech_tittle} </p>
+         <p>{speaker.attributes.date} </p>
+          <p>{speaker.attributes.time} </p>
+        <p>{speaker.attributes.location.data.attributes.name} </p>
+                <p>{speaker.attributes.speech_description[0].children[0].text} </p>
+
+        
+     
+    </li>
+  ))}
+</ul>
+
+
+
+    <!-- tags[2].attributes.speakers.data[0].attributes.name -->

@@ -1,11 +1,17 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SpeakerTag from "../../components/SpeakerTag.astro";
 import fetchApi from "../../lib/strapi";
 
 export async function getStaticPaths() {
   const tags = await fetchApi({
     endpoint: "tags",
     wrappedByKey: "data",
+    query: {
+     populate: ["speakers", "speakers.location"],
+    
+  },
+ 
   });
 
 
@@ -14,6 +20,7 @@ export async function getStaticPaths() {
     props: {
      tagSpeech,
     },
+    
   }));
 
   return paths;
@@ -23,5 +30,8 @@ const { tagSpeech } = Astro.props;
 ---
 
 <BaseLayout>
-  
+   <h2>Speakers with <span>{tagSpeech.attributes.tag}</span> tag</h2>
+
+   <SpeakerTag tagSpeech={tagSpeech} />
+     
 </BaseLayout>
