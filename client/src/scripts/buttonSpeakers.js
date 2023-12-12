@@ -14,5 +14,5 @@ const toggleSpeakers = (e) => {
   $btnCopenhagen.classList.toggle("button__active", isCopenhagen);
 };
 
-$btnCopenhagen.addEventListener("click", toggleSpeakers);
-$btnOslo.addEventListener("click", toggleSpeakers);
+$btnCopenhagen?.addEventListener("click", toggleSpeakers);
+$btnOslo?.addEventListener("click", toggleSpeakers);

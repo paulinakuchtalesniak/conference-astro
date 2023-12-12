@@ -1,8 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LineUpSpeakers from '../components/LineUpSpeakers.astro';
+import Filter from '../components/Filter.astro';
 const pageTitle = "Line up";
+import fetchApi from '../lib/strapi';
+const speakers = await fetchApi({
+  endpoint: "speakers",
+  wrappedByKey: "data",
+   query: {
+    populate: ["photo","location", "tags","event_dates", "speech_type"],
+    
+  },
+
+});
+
+
+
 ---
 <BaseLayout pageTitle={pageTitle}>
-  <h2>Check Netlify-test4</h2>
-
+  <h2>Line up!</h2>
+  <Filter speakers={speakers} />
+<section class="section__line-up">
+<LineUpSpeakers speakers={speakers} />
+</section>
+  
 </BaseLayout>

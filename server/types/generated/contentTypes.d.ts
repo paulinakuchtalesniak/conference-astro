@@ -677,6 +677,33 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiDayDay extends Schema.CollectionType {
+  collectionName: 'days';
+  info: {
+    singularName: 'day';
+    pluralName: 'days';
+    displayName: 'Day';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    date: Attribute.Date;
+    speakers: Attribute.Relation<
+      'api::day.day',
+      'manyToMany',
+      'api::speaker.speaker'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::day.day', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::day.day', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiLocationLocation extends Schema.CollectionType {
   collectionName: 'locations';
   info: {
@@ -756,6 +783,11 @@ export interface ApiSpeakerSpeaker extends Schema.CollectionType {
       'api::speaker.speaker',
       'manyToOne',
       'api::location.location'
+    >;
+    days: Attribute.Relation<
+      'api::speaker.speaker',
+      'manyToMany',
+      'api::day.day'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -895,6 +927,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::day.day': ApiDayDay;
       'api::location.location': ApiLocationLocation;
       'api::speaker.speaker': ApiSpeakerSpeaker;
       'api::speech-type.speech-type': ApiSpeechTypeSpeechType;

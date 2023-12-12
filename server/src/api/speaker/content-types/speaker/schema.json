@@ -64,6 +64,12 @@
       "relation": "manyToOne",
       "target": "api::location.location",
       "inversedBy": "speakers"
+    },
+    "days": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::day.day",
+      "mappedBy": "speakers"
     }
   }
 }

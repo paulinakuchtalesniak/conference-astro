@@ -1,0 +1,94 @@
+---
+import fetchApi from '../lib/strapi';
+const { speakers } = Astro.props;
+const tags = await fetchApi({
+    endpoint: "tags",
+    wrappedByKey: "data",
+});
+const days = await fetchApi({
+    endpoint: "days",
+    wrappedByKey: "data",
+});
+const speechTypes = await fetchApi({
+    endpoint: "speech_types",
+    wrappedByKey: "data",
+});
+
+const speakersTags = tags.map((tag) => tag.attributes.tag);
+const dates = days.map((day) => day.attributes.date);
+const types = days.map((day) => day.attributes.speech_type);
+const locations = speakers.map((speaker)=> speaker.attributes.location.data.attributes.name)
+const uniqueLocations = [];
+locations.forEach((location) => {
+  if (!uniqueLocations.includes(location)) {
+    uniqueLocations.push(location);
+  }
+});
+
+
+---
+
+
+<div>
+  <!-- Filter for Speaker Tags -->
+  <label for="tag-filter">Filter by Tag:</label>
+  <select id="tag-filter">
+    <option value="">Select a Tag</option>
+    {speakersTags.map(tag => (
+      <option value={tag}>{tag}</option>
+    ))}
+  </select>
+</div>
+
+<div class="date-tabs">
+  {dates.map((date, index) => (
+    <button 
+      class={`date-tab ${index === 0 ? 'active' : ''}`} 
+      data-date={date}
+      id={`date-tab-${index}`}
+    >
+      {date}
+    </button>
+  ))}
+</div>
+
+  {uniqueLocations.map((location, index) => (
+    <div>
+      <input type="checkbox" id={`location-${index}`} name="locations" value={location} />
+      <label for={`location-${index}`}>{location}</label>
+    </div>
+  ))}
+
+<style>
+  .date-tab {
+    padding: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: #f0f0f0;
+  }
+
+  .date-tab.active {
+    background-color: #ddd;
+  }
+</style>
+<script>
+    function setupDateTabs() {
+  const tabs = document.querySelectorAll('.date-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (event) => {
+      // Remove active class from all tabs
+      tabs.forEach(t => t.classList.remove('active'));
+
+      // Add active class to clicked tab
+      tab.classList.add('active');
+
+     
+    });
+  });
+}
+
+// Initialize the tabs when the script loads
+setupDateTabs();
+</script>
+
