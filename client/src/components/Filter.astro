@@ -27,6 +27,25 @@ locations.forEach((location) => {
 
 
 ---
+<script>
+    function setupDateTabs() {
+  const tabs = document.querySelectorAll('.date-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (event) => {
+      // Remove active class from all tabs
+      tabs.forEach(t => t.classList.remove('active'));
+
+      // Add active class to clicked tab
+      tab.classList.add('active');
+
+     
+    });
+  });
+}
+
+// Initialize the tabs when the script loads
+setupDateTabs();
+</script>
 
 
 <div>
@@ -39,6 +58,19 @@ locations.forEach((location) => {
     ))}
   </select>
 </div>
+<style>
+  .date-tab {
+    padding: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: #f0f0f0;
+  }
+
+  .date-tab.active {
+    background-color: #ddd;
+  }
+</style>
 
 <div class="date-tabs">
   {dates.map((date, index) => (
@@ -59,36 +91,4 @@ locations.forEach((location) => {
     </div>
   ))}
 
-<style>
-  .date-tab {
-    padding: 10px;
-    margin-right: 5px;
-    cursor: pointer;
-    border: none;
-    background-color: #f0f0f0;
-  }
-
-  .date-tab.active {
-    background-color: #ddd;
-  }
-</style>
-<script>
-    function setupDateTabs() {
-  const tabs = document.querySelectorAll('.date-tab');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', (event) => {
-      // Remove active class from all tabs
-      tabs.forEach(t => t.classList.remove('active'));
-
-      // Add active class to clicked tab
-      tab.classList.add('active');
-
-     
-    });
-  });
-}
-
-// Initialize the tabs when the script loads
-setupDateTabs();
-</script>
 

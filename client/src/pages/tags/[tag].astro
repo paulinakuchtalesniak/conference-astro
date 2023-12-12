@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 
 
   const paths = tags.map((tagSpeech, i) => ({
-    params: { id: tagSpeech.attributes.tag.toString() },
+    params: { tag: tagSpeech.attributes.tag.toString() },
     props: {
      tagSpeech,
     },

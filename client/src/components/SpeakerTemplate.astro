@@ -1,0 +1,20 @@
+---
+import '../styles/global.css';
+const { speaker } = Astro.props;
+console.log(speaker);
+---  
+
+<section class="speaker__page">
+
+      <img class="speakers__card-img" src={`${import.meta.env.STRAPI_URL}${speaker.attributes.photo.data[0].attributes.url}`} alt={`Photo of ${speaker.attributes.name}`} />
+      <h3>{speaker.attributes.name} {speaker.attributes.surname}</h3>
+      <p>{speaker.attributes.speech_tittle}</p>
+      <ul>
+        {speaker.attributes.tags.data.map(tag => (
+          <li class="speakers__tag">
+            <a href={`/tags/${tag.attributes.tag}`}>{tag.attributes.tag}</a>
+          </li>
+        ))}
+      </ul>
+ 
+</section>
