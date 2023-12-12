@@ -70,7 +70,9 @@ display: grid;
   ? (
 
    <li class="speakers__card" data-speaker={speaker.attributes.name}>
+        <a href={`/speakers/${speaker.id}`}>
   <img class="speakers__card-img" src={`${import.meta.env.STRAPI_URL}${speaker.attributes.photo.data[0].attributes.url}`} alt={`Photo of ${speaker.attributes.name}`} />
+    </a>
       <h3 class="speakers__card-data">{speaker.attributes.name} {speaker.attributes.surname}</h3>
       <p class="speakers__card-title">{speaker.attributes.speech_tittle}</p>
        <p class="speakers__card-type"> {speaker.attributes.speech_type.data.attributes.speech_type}</p>
@@ -88,7 +90,9 @@ display: grid;
   : (
 
     <li class="speakers__card" data-speaker={speaker.attributes.name}>
+        <a href={`/speakers/${speaker.id}`}>
       <img class="speakers__card-img" src={`${import.meta.env.STRAPI_URL}${speaker.attributes.photo.data[0].attributes.url}`} alt={`Photo of ${speaker.attributes.name}`} />
+        </a>
       <h3 class="speakers__card-data">{speaker.attributes.name} {speaker.attributes.surname}</h3>
       <p class="speakers__card-title">{speaker.attributes.speech_tittle}</p>
       <ul class="speakers__list-tags">
