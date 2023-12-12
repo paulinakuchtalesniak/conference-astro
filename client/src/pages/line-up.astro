@@ -8,12 +8,13 @@ const speakers = await fetchApi({
   endpoint: "speakers",
   wrappedByKey: "data",
    query: {
-    populate: ["photo","location", "tags","event_dates", "speech_type"],
+    populate: ["photo","location", "tags","day", "speech_type"],
     
   },
 
-});
 
+});
+  console.log(speakers[0].attributes.day.data.attributes);
 
 
 ---

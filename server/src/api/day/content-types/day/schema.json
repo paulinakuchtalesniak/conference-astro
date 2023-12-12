@@ -4,7 +4,8 @@
   "info": {
     "singularName": "day",
     "pluralName": "days",
-    "displayName": "Day"
+    "displayName": "Day",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,9 +17,9 @@
     },
     "speakers": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToMany",
       "target": "api::speaker.speaker",
-      "inversedBy": "days"
+      "mappedBy": "day"
     }
   }
 }

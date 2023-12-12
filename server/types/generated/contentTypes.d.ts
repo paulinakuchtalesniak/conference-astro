@@ -683,6 +683,7 @@ export interface ApiDayDay extends Schema.CollectionType {
     singularName: 'day';
     pluralName: 'days';
     displayName: 'Day';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -691,7 +692,7 @@ export interface ApiDayDay extends Schema.CollectionType {
     date: Attribute.Date;
     speakers: Attribute.Relation<
       'api::day.day',
-      'manyToMany',
+      'oneToMany',
       'api::speaker.speaker'
     >;
     createdAt: Attribute.DateTime;
@@ -784,9 +785,9 @@ export interface ApiSpeakerSpeaker extends Schema.CollectionType {
       'manyToOne',
       'api::location.location'
     >;
-    days: Attribute.Relation<
+    day: Attribute.Relation<
       'api::speaker.speaker',
-      'manyToMany',
+      'manyToOne',
       'api::day.day'
     >;
     createdAt: Attribute.DateTime;

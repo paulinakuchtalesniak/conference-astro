@@ -65,11 +65,11 @@
       "target": "api::location.location",
       "inversedBy": "speakers"
     },
-    "days": {
+    "day": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "manyToOne",
       "target": "api::day.day",
-      "mappedBy": "speakers"
+      "inversedBy": "speakers"
     }
   }
 }

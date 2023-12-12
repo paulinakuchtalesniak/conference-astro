@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 const { speaker,lineUp } = Astro.props;
+// const date = speaker.attributes.day.data.attributes.date
+console.log( speaker)
 
 
 function formatTag(tag) {
@@ -61,7 +63,9 @@ display: grid;
    text-decoration:none;
     color: #9e3617;
   }
-
+.hidden{
+  display: none;
+}
  
     </style>
 
@@ -69,10 +73,11 @@ display: grid;
   lineUp
   ? (
 
-   <li class="speakers__card" data-speaker={speaker.attributes.name}>
+   <li class="speakers__card speakers__card-lineup" data-date-speaker={speaker.attributes.day?.data.attributes.date} data-location={speaker.attributes.location?.data.attributes.name}>
         <a href={`/speakers/${speaker.id}`}>
   <img class="speakers__card-img" src={`${import.meta.env.STRAPI_URL}${speaker.attributes.photo.data[0].attributes.url}`} alt={`Photo of ${speaker.attributes.name}`} />
     </a>
+    <p>{speaker.attributes.day?.data.attributes.date}</p>
       <h3 class="speakers__card-data">{speaker.attributes.name} {speaker.attributes.surname}</h3>
       <p class="speakers__card-title">{speaker.attributes.speech_tittle}</p>
        <p class="speakers__card-type"> {speaker.attributes.speech_type.data.attributes.speech_type}</p>
