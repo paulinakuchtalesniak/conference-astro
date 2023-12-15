@@ -1,0 +1,124 @@
+---
+import '../styles/global.css';
+import ScheduleCard from '../components/ScheduleCard.astro';
+const { speakers } = Astro.props;
+console.log(speakers[0].attributes.day.data.attributes.date);
+
+const location1SpeakersDay1 = speakers.filter(speaker => 
+    speaker.attributes.location.data.attributes.name === 'Copenhagen Wellness Center' && 
+    speaker.attributes.day.data.attributes.date === '2023-12-20');
+    const location1SpeakersDay2 = speakers.filter(speaker => 
+    speaker.attributes.location.data.attributes.name === 'Copenhagen Wellness Center' && 
+    speaker.attributes.day.data.attributes.date === '2023-12-21');
+    const location1SpeakersDay3 = speakers.filter(speaker => 
+    speaker.attributes.location.data.attributes.name === 'Copenhagen Wellness Center' && 
+    speaker.attributes.day.data.attributes.date === '2023-12-22');
+const location2SpeakersDay1 = speakers.filter(speaker => speaker.attributes.location.data.attributes.name === 'Oslo Aura Sanctuary'  && 
+    speaker.attributes.day.data.attributes.date === '2023-12-20');
+    const location2SpeakersDay2 = speakers.filter(speaker => speaker.attributes.location.data.attributes.name === 'Oslo Aura Sanctuary'  && 
+    speaker.attributes.day.data.attributes.date === '2023-12-21');
+        const location2SpeakersDay3 = speakers.filter(speaker => speaker.attributes.location.data.attributes.name === 'Oslo Aura Sanctuary'  && 
+    speaker.attributes.day.data.attributes.date === '2023-12-22');
+const formatDate=(dateString) =>{
+    const parts = dateString.split('-');
+    return parts[2] + '-' + parts[1] + '-' + parts[0];
+}
+---  
+  
+<style>
+.agenda-speakers__section{
+  grid-column: 2;
+   display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+ 
+}
+
+.schedule__copenhagen{
+   display: grid;
+    grid-template-rows: repeat(3, minmax(300px, 1fr));
+  gap: var(--space-xl);
+}
+.first-day__heading, .second-day__heading, .third-day__heading{
+    margin: var(--space-xl) 0;
+    font-size: var(--step-4);
+    font-weight: 500;
+    text-align: center;
+    color: #ea6967;
+    border-bottom: solid 1px #ea6967;
+}
+.hidden-element{
+    display: none;
+}
+
+
+</style>
+
+  <section class="agenda-speakers__section agenda-speakers__section--copenhagen ">
+    <section class="agenda-speakers__section--first-day">
+    <h3 class="first-day__heading">{formatDate(location1SpeakersDay1[0]?.attributes.day.data.attributes.date)}</h3>
+      <ul class="conference-day1-schedule schedule__copenhagen">
+        {location1SpeakersDay1.map(speaker => (
+  <ScheduleCard speaker={speaker} />
+
+        ))}
+      </ul>
+</section>
+    <section class="agenda-speakers__section--second-day">
+    <h3 class="first-day__heading">{formatDate(location2SpeakersDay2[0]?.attributes.day.data.attributes.date)}</h3>
+       <ul class="conference-day1-schedule schedule__copenhagen">
+        {location2SpeakersDay2.map(speaker => (
+  <ScheduleCard speaker={speaker} />
+
+        ))}
+      </ul>
+  </section>
+
+
+      <section class="agenda-speakers__section--first-day">
+    <h3 class="third-day__heading">{formatDate(location1SpeakersDay3[0]?.attributes.day.data.attributes.date)}</h3>
+       <ul class="conference-day1-schedule schedule__copenhagen">
+        {location1SpeakersDay3.map(speaker => (
+  <ScheduleCard speaker={speaker} />
+
+        ))}
+      </ul>
+  </section>
+  </section>
+
+
+   <section class="agenda-speakers__section agenda-speakers__section--oslo hidden-element ">
+    <section class="agenda-speakers__section--first-day">
+    <h3 class="first-day__heading">{formatDate(location2SpeakersDay1[0]?.attributes.day.data.attributes.date)}</h3>
+      <ul class="conference-day1-schedule schedule__copenhagen">
+        {location2SpeakersDay1.map(speaker => (
+  <ScheduleCard speaker={speaker} />
+
+        ))}
+      </ul>
+</section>
+    <section class="agenda-speakers__section--second-day">
+    <h3 class="first-day__heading">{formatDate(location1SpeakersDay2[0]?.attributes.day.data.attributes.date)}</h3>
+       <ul class="conference-day1-schedule schedule__copenhagen">
+        {location1SpeakersDay2.map(speaker => (
+  <ScheduleCard speaker={speaker} />
+
+        ))}
+      </ul>
+  </section>
+
+
+      <section class="agenda-speakers__section--first-day">
+    <h3 class="third-day__heading">{formatDate(location2SpeakersDay3[0]?.attributes.day.data.attributes.date)}</h3>
+       <ul class="conference-day1-schedule schedule__copenhagen">
+        {location2SpeakersDay3.map(speaker => (
+  <ScheduleCard speaker={speaker} />
+
+        ))}
+      </ul>
+  </section>
+  </section>
+
+        <script>
+    import "../scripts/buttonAgenda.js";
+  </script>

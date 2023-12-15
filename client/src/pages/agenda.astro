@@ -1,9 +1,50 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ScheduleList from '../components/ScheduleList.astro';
 const pageTitle = "Agenda";
-
+import fetchApi from '../lib/strapi';
+const speakers = await fetchApi({
+  endpoint: "speakers",
+  wrappedByKey: "data",
+   query: {
+    populate: ["photo","location", "tags","day", "speech_type"],
+    
+  },
+});
 ---
+<style>
+  .days__wrapper{
+      display: grid;
+    grid-template-columns: 15% 1fr 15%;
+  }
+
+    @media screen and (max-width: 1024px) {
+.days__wrapper{
+      display: grid;
+    grid-template-columns: 10% 1fr 10%;
+  }
+
+}
+  @media screen and (max-width: 768px) {
+.days__wrapper{
+      display: grid;
+    grid-template-columns: 5% 1fr 5%;
+  }
+
+}
+</style>
+
+
 <BaseLayout pageTitle={pageTitle}>
-  <h2>Check Netlify-test4</h2>
+  <h2>Schedule</h2>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, odio odit consequatur iste dignissimos delectus tenetur suscipit placeat veritatis exercitationem, tempora iusto asperiores neque fugit reiciendis id aspernatur debitis ipsam?</p>
+    <div class="buttons-speakers__wrapper">
+ <button class="button button__copenhagen--agenda button__active">Copenhagen</button>
+  <button class="button button__oslo--agenda">Oslo</button>
+
+  <div class="days__wrapper">
+     <ScheduleList speakers={speakers} />
+  </div>
+     </div>
 
 </BaseLayout>
