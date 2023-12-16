@@ -1,33 +1,81 @@
 ---
 // import '../styles/global.css';
 const { tickets } = Astro.props;
+---
 
----  
 <style>
-.tickets__list{
-    background-color: #ea6967;
-}
+  .tickets__list {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    gap: var(--space-xl);
+  }
+  .tickets__list-item {
+    background-color: #ea696725;
+    padding: var(--space-l) var(--space-m);
+    border-radius: var(--space-xs);
+    display: grid;
+    gap: var(--space-s);
+  }
+  .tickets__description-location {
+    text-transform: uppercase;
+    background-color: #ea69672e;
+    border-radius: var(--space-2xs);
+    font-weight: 400;
+
+    text-align: center;
+    padding: var(--space-xs) var(--space-s);
+    justify-self: center;
+  }
+  .tickets__heading {
+    font-size: var(--step-0);
+    justify-self: center;
+    text-transform: uppercase;
+  }
+  .tickets__price {
+    align-self: center;
+    font-size: var(--step-3);
+    font-weight: 500;
+    color: #db5351;
+    justify-self: center;
+  }
+  .tickets__description {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .tickets__description-item {
+    font-size: var(--step--1);
+    text-align: center;
+    line-height: 1.5;
+  }
+  .button{
+align-self: flex-end;
+  }
 </style>
 
 <ul class="tickets__list">
-  {tickets.map(ticket =>(
-    <li>
-<h3>{ticket.attributes.name}</h3>
-<p> {ticket.attributes.price}€</p>
+  {
+    tickets.map((ticket) => (
+      <li class="tickets__list-item">
+        <p class="tickets__price"> {ticket.attributes.price}€</p>
+        <p class="tickets__description-location">
+          {ticket.attributes.locations.data[0].attributes.name}
+        </p>
+        <h3 class="tickets__heading">{ticket.attributes.name}</h3>
 
-
-    <ul>
-      {ticket.attributes.description.map((descItem) => (
-        <li>
-          {descItem.children.map((child) => (
-            <span>{child.text}</span>
+        <ul class="tickets__description">
+          {ticket.attributes.description.map((descItem) => (
+            <li class="tickets__description-item">
+              {descItem.children.map((child) => (
+                <span>{child.text}</span>
+              ))}
+            </li>
           ))}
-        </li>
-      ))}
-    </ul>
-   <p> {ticket.attributes.locations.data[0].attributes.name}</p>
+        </ul>
 
- </li>
-  ))}
-
+        <button class="button">Buy ticket</button>
+      </li>
+    ))
+  }
 </ul>

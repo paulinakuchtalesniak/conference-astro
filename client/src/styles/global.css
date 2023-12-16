@@ -189,7 +189,8 @@ h1 {
 .about-speakers__heading,
 .about-conference__heading,
 .agenda-intro__heading,
-.conference-number__heading {
+.conference-number__heading,
+.tickets-section__heading {
   font-size: var(--step-4);
   font-weight: 500;
   color: #ea6967;

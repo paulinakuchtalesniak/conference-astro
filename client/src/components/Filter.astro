@@ -1,10 +1,6 @@
 ---
 import fetchApi from "../lib/strapi";
 const { speakers } = Astro.props;
-const tags = await fetchApi({
-  endpoint: "tags",
-  wrappedByKey: "data",
-});
 const days = await fetchApi({
   endpoint: "days",
   wrappedByKey: "data",
