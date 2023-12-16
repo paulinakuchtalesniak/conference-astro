@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "speech_types",
+  "info": {
+    "singularName": "speech-type",
+    "pluralName": "speech-types",
+    "displayName": "Speech_type",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "speech_type": {
+      "type": "string"
+    },
+    "speakers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::speaker.speaker",
+      "mappedBy": "speech_type"
+    }
+  }
+}

@@ -1,0 +1,79 @@
+---
+import { Image } from "astro:assets";
+const { locations } = Astro.props;
+---
+
+<style>
+  .locations__wrapper {
+    margin: var(--space-2xl) 0;
+    display: grid;
+    grid-template-columns: 20% 1fr 20%;
+    color: var(--text-color);
+  }
+  .locations-list {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+  .locations_article {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .locations-list__img-wrapper {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .locations-list__data-wrapper {
+    grid-column: 2;
+    grid-row: 1;
+    padding-left: var(--space-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+  .locations-list__heading {
+    font-size: var(--step-1);
+    line-height: 1.2;
+    color: var(--headings-color);
+  }
+  .locations-list__description {
+    color: #2e2e2e;
+    font-size: var(--step--1);
+  }
+  .locations-list__adress {
+    font-size: var(--step-0);
+  }
+</style>
+
+<div class="locations__wrapper">
+  <ul class="locations-list">
+    {
+      locations.map((location) => (
+        <article class="locations_article">
+          <div class="locations-list__img-wrapper">
+            <Image
+              class="locations_article"
+              src={`${import.meta.env.STRAPI_URL}${
+                location.attributes.photo.data[0].attributes.url
+              }`}
+              alt={`Photo of ${location.attributes.name}`}
+              width="600"
+              height="700"
+              widths={[250, 350, 500, 750]}
+              sizes="(max-width: 35em) 70vw, (max-width: 50em) 60vw, 30vw"
+            />
+          </div>
+          <div class="locations-list__data-wrapper">
+            <h3 class="locations-list__heading">{location.attributes.name}</h3>
+            <p class="locations-list__adress"> {location.attributes.adress}</p>
+            <p class="locations-list__description">
+              {" "}
+              {location.attributes.description[0].children[0].text}
+            </p>
+          </div>
+        </article>
+      ))
+    }
+  </ul>
+</div>

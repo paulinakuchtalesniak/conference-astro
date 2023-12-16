@@ -1,0 +1,152 @@
+---
+import { Image } from "astro:assets";
+const { speaker, lineUp } = Astro.props;
+import { formatTag, formatDate } from "../scripts/formatters.js";
+const baseUrl = `${import.meta.env.BASE_URL}`;
+// const baseUrl = ``;
+---
+
+<style>
+  .speakers__card {
+    background: rgb(239, 140, 64);
+    background: radial-gradient(
+      circle,
+      rgba(239, 140, 64, 1) 3%,
+      rgba(234, 105, 103, 1) 48%,
+      rgba(246, 174, 151, 1) 87%
+    );
+    display: grid;
+  }
+
+  .speakers__card-data {
+    color: var(--light-white);
+    font-size: var(--step-3);
+    padding: var(--space-xs) var(--space-xs) 0 var(--space-xs);
+    text-align: center;
+    align-self: start;
+  }
+  .speakers__card-title {
+    color: #fff6ee;
+    font-size: var(--step-0);
+    padding: var(--space-2xs) var(--space-s);
+    text-align: center;
+  }
+  .speakers__list-tags {
+    display: flex;
+    row-gap: var(--space-xs);
+    column-gap: var(--space-2xs);
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: center;
+    padding: var(--space-xs) var(--space-xs);
+    align-self: center;
+  }
+  .speakers__tag {
+    font-size: var(--step--2);
+    background-color: #fff6ee50;
+    padding: var(--space-2xs) var(--space-xs);
+    border-radius: 1rem;
+  }
+  .speakers__tag a {
+    text-decoration: none;
+    color: #9e3617;
+  }
+  .hidden {
+    display: none;
+  }
+  .name-divider {
+    display: inline-block;
+    width: var(--space-3xs);
+  }
+
+  .speakers__card-type {
+    align-self: center;
+  }
+  .speakers__card-date {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: flex-end;
+    background-color: #fff6ee57;
+    align-self: flex-start;
+    padding: var(--space-2xs) var(--space-xs);
+    border-radius: var(--space-2xs);
+    margin: var(--space-2xs);
+  }
+  .speakers__card-link {
+    grid-column: 1;
+    grid-row: 1;
+  }
+</style>
+
+{
+  lineUp ? (
+    <li
+      class="speakers__card speakers__card-lineup"
+      data-date-speaker={speaker.attributes.day?.data.attributes.date}
+      data-location={speaker.attributes.location?.data.attributes.name}
+    >
+      <a class="speakers__card-link" href={`${baseUrl}/speakers/${speaker.id}`}>
+        <Image
+          class="speakers__card-img"
+          src={`${import.meta.env.STRAPI_URL}${
+            speaker.attributes.photo?.data[0].attributes.url
+          }`}
+          alt={`Photo of ${speaker.attributes.name}`}
+          width="700"
+          height="700"
+          widths={[250, 350, 500, 750]}
+          sizes="(max-width: 35em) 70vw, (max-width: 50em) 60vw, 30vw"
+        />
+      </a>
+      <p class="speakers__card-date">{formatDate(speaker.attributes.date)}</p>
+      <h3 class="speakers__card-data">
+        {" "}
+        {speaker.attributes.name} <span class="name-divider" />{" "}
+        {speaker.attributes.surname}{" "}
+      </h3>
+      <p class="speakers__card-title">{speaker.attributes.speech_tittle}</p>
+
+      <ul class="speakers__list-tags">
+        {speaker.attributes.tags.data.map((tag) => (
+          <li class="speakers__tag">
+            <a href={`${baseUrl}/tags/${tag.attributes.tag}`}>
+              {formatTag(tag.attributes.tag)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </li>
+  ) : (
+    // <>
+      <li class="speakers__card" data-speaker={speaker.attributes.name}>
+        <a href={`${baseUrl}/speakers/${speaker.id}`}>
+          <Image
+            class="speakers__card-img"
+            src={`${import.meta.env.STRAPI_URL}${
+              speaker.attributes.photo?.data[0].attributes.url
+            }`}
+            alt={`Photo of ${speaker.attributes.name}`}
+            width="700"
+            height="700"
+            widths={[250, 350, 500, 750]}
+            sizes="(max-width: 35em) 70vw, (max-width: 50em) 60vw, 30vw"
+          />
+        </a>
+        <h3 class="speakers__card-data">
+          {speaker.attributes.name} <span class="name-divider" />
+          {speaker.attributes.surname}
+        </h3>
+        <p class="speakers__card-title">{speaker.attributes.speech_tittle}</p>
+        <ul class="speakers__list-tags">
+          {speaker.attributes.tags.data.map((tag) => (
+            <li class="speakers__tag">
+              <a href={`${baseUrl}/tags/${tag.attributes.tag}`}>
+                {formatTag(tag.attributes.tag)}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+     </>
+  )
+}

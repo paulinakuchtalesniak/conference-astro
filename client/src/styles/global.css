@@ -1,0 +1,236 @@
+@import url('../styles/mdstyles.css');
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+img {
+  max-inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: top;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+:root {
+  /* fonts */
+  --step--2: clamp(0.7813rem, 0.7746rem + 0.0282vw, 0.8rem);
+  --step--1: clamp(0.9375rem, 0.9155rem + 0.0939vw, 1rem);
+  --step-0: clamp(1.125rem, 1.081rem + 0.1878vw, 1.25rem);
+  --step-1: clamp(1.35rem, 1.2752rem + 0.3192vw, 1.5625rem);
+  --step-2: clamp(1.62rem, 1.5027rem + 0.5005vw, 1.9531rem);
+  --step-3: clamp(1.9438rem, 1.7686rem + 0.7474vw, 2.4413rem);
+  --step-4: clamp(2.3325rem, 2.0792rem + 1.0808vw, 3.0519rem);
+  --step-5: clamp(2.7994rem, 2.4418rem + 1.5258vw, 3.815rem);
+
+  /* spacing */
+  --space-3xs: clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem);
+  --space-2xs: clamp(0.5625rem, 0.5405rem + 0.0939vw, 0.625rem);
+  --space-xs: clamp(0.875rem, 0.853rem + 0.0939vw, 0.9375rem);
+  --space-s: clamp(1.125rem, 1.081rem + 0.1878vw, 1.25rem);
+  --space-m: clamp(1.6875rem, 1.6215rem + 0.2817vw, 1.875rem);
+  --space-l: clamp(2.25rem, 2.162rem + 0.3756vw, 2.5rem);
+  --space-xl: clamp(3.375rem, 3.243rem + 0.5634vw, 3.75rem);
+  --space-2xl: clamp(4.5rem, 4.3239rem + 0.7512vw, 5rem);
+  --space-3xl: clamp(6.75rem, 6.4859rem + 1.1268vw, 7.5rem);
+
+  --headings-color: #ea6967;
+  --text-color: rgb(57, 57, 57);
+  --light-white: #ffede7;
+  --header-color: rgb(160, 66, 66);
+  --buttons-light: #fcbbba;
+}
+
+body {
+  font-family: "Bricolage Grotesque", sans-serif;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100vw;
+  line-height: 1.5;
+  background-color: #fff6ee;
+  position: relative;
+  color: var(--text-color);
+
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 1rem 0;
+  font-size: var(--step-4);
+}
+
+.navigation-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+  padding: 0 var(--space-l);
+  background-color: #fff6ee;
+  position: fixed;
+  width: 100vw;
+  z-index: 3;
+  top: 0;
+  right: 0;
+
+}
+
+.logo {
+  height: 5vh;
+  width: 5vh;
+  background-color: #f97270;
+}
+
+.nav-links {
+  display: none;
+  background-color: #ea6967;
+
+  transform: translateX(100%);
+  margin: 0;
+  position: fixed;
+  transition: transform 1s ease;
+  width: 100vw;
+  padding: 2rem 1rem;
+}
+
+.logo {
+  margin-top: var(--space-m);
+  height: 5vh;
+  width: 5vh;
+}
+
+.nav-links a {
+  display: flex;
+  padding: var(--space-s) var(--space-m);
+  flex-direction: column;
+  text-decoration: none;
+  font-size: var(--step-0);
+  font-weight: 400;
+  color: var(--light-white);
+  border-bottom: var(--light-white) solid 1px;
+  width: 80%;
+}
+
+.expanded {
+  display: unset;
+  transform: translateX(0);
+}
+
+.hamburger {
+  padding: var(--space-m) var(--space-l) 0 0;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.hamburger .line {
+  display: block;
+  width: 40px;
+  height: 5px;
+  margin-bottom: 10px;
+  background-color: #ff9776;
+}
+
+.button {
+  outline: none;
+  border: none;
+  font-size: var(--step-0);
+  padding: var(--space-xs) var(--space-m);
+  border-radius: 2rem;
+  background-color: #fcbbba;
+  color: #ea6967;
+  font-weight: 300;
+}
+
+.button__active {
+  background-color: #ea6967;
+  color: #fbdbd0;
+}
+
+.tags__section,
+.fqa,
+.tags__index,
+.section__line-up,
+.locations__section,
+.agenda-intro__wrapper,
+.speaker__page,
+.header {
+  padding-top: 15vh;
+}
+
+.tags__index {
+  min-height: 80vh;
+  display: grid;
+  grid-template-columns: 20% 1fr 20%;
+  grid-template-rows: 1.5fr 3fr;
+  align-items: flex-start;
+}
+
+.tags__heading,
+.fqa__heading,
+.index__tags-heading,
+.heading__line-up,
+.locations__heading,
+.about-speakers__heading,
+.about-conference__heading,
+.agenda-intro__heading,
+.conference-number__heading,
+.tickets-section__heading {
+  font-size: var(--step-4);
+  font-weight: 500;
+  color: #ea6967;
+  text-align: center;
+
+
+}
+
+.locations__section {
+  min-height: 80vh;
+}
+
+
+@media screen and (min-width: 950px) {
+  .nav-links {
+    flex-wrap: wrap;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    position: static;
+    background: none;
+    transform: none;
+    transition: none;
+    width: auto;
+  }
+
+  .nav-links a {
+    display: inline-block;
+    padding: var(--space-2xs);
+    flex-direction: row;
+    text-decoration: none;
+    border: none;
+    width: auto;
+    color: #ea6967;
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+
+  .hamburger {
+    display: none;
+  }
+}

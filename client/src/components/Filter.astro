@@ -1,0 +1,115 @@
+---
+import fetchApi from "../lib/strapi";
+const { speakers } = Astro.props;
+const days = await fetchApi({
+  endpoint: "days",
+  wrappedByKey: "data",
+});
+
+const dates = days.map((day) => day.attributes.date);
+const locations = speakers.map(
+  (speaker) => speaker.attributes.location.data.attributes.name
+);
+const uniqueLocations = [];
+locations.forEach((location) => {
+  if (!uniqueLocations.includes(location)) {
+    uniqueLocations.push(location);
+  }
+});
+---
+
+<style>
+  .date-tabs {
+    display: flex;
+    gap: var(--space-s);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .date-tab {
+    border: none;
+    background-color: var(--buttons-light);
+    border-radius: var(--space-s);
+    padding: var(--space-2xs) var(--space-s);
+    font-size: var(--step-0);
+    text-transform: uppercase;
+    color: #c13c3a;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+  .date-tab:hover {
+    background-color: #d95654;
+    color: var(--light-white);
+  }
+
+  .date-tab.active {
+    background-color: var(--headings-color);
+    color: var(--light-white);
+  }
+  .filter__section {
+    grid-row: 2;
+    grid-column: 2;
+    justify-self: center;
+    margin-top: var(--space-l);
+  }
+  .speakers__card.hidden {
+    display: none;
+  }
+  .filter__heading {
+    text-align: center;
+    color: var(--text-color);
+    font-size: var(--step-0);
+    margin-bottom: var(--space-s);
+  }
+  .filters__wrapper {
+    margin: var(--space-s);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .locations__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    accent-color: var(--headings-color);
+  }
+  .locations__wrapper input {
+    scale: 1.5;
+  }
+  .locations__wrapper label {
+    color: var(--text-color);
+  }
+</style>
+
+<section class="filter__section">
+  <h3 class="filter__heading">Filter speeches by date & location!</h3>
+  <div class="filters__wrapper">
+    <div class="date-tabs">
+      <button class="date-tab active" data-date="">All Dates</button>
+      {
+        dates.map((date, index) => (
+          <button class="date-tab" data-date={date} id={`date-tab-${index}`}>
+            {date}
+          </button>
+        ))
+      }
+    </div>
+    <div class="locations__wrapper">
+      {
+        uniqueLocations.map((location, index) => (
+          <div>
+            <input
+              type="checkbox"
+              id={`location-${index}`}
+              name="locations"
+              value={location}
+            />
+            <label for={`location-${index}`}>{location}</label>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LocationCard from '../components/LocationCard.astro';
+const pageTitle = "Locations";
+import fetchApi from '../lib/strapi';
+const locations = await fetchApi({
+  endpoint: "locations",
+  wrappedByKey: "data",
+   query: {
+    populate: ["photo"],
+    
+  },
+});
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <section class="locations__section">
+  <h2 class="locations__heading">Conference locations</h2>
+   <LocationCard locations={locations} />
+</section>
+</BaseLayout>
