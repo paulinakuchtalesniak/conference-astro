@@ -1,45 +1,55 @@
 ---
-import '../styles/global.css';
 const { speakers } = Astro.props;
-import SpeakerSmallCard from '../components/SpeakerSmallCard.astro';
+import SpeakerSmallCard from "../components/SpeakerSmallCard.astro";
 
-const location1Speakers = speakers.filter(speaker => speaker.attributes.location.data.attributes.name === 'Copenhagen Wellness Center').slice(0, 4);
-const location2Speakers = speakers.filter(speaker => speaker.attributes.location.data.attributes.name === 'Oslo Aura Sanctuary').slice(0, 4);
----  
+const location1Speakers = speakers
+  .filter(
+    (speaker) =>
+      speaker.attributes.location.data.attributes.name ===
+      "Copenhagen Wellness Center"
+  )
+  .slice(0, 4);
+const location2Speakers = speakers
+  .filter(
+    (speaker) =>
+      speaker.attributes.location.data.attributes.name === "Oslo Aura Sanctuary"
+  )
+  .slice(0, 4);
+---
 
 <div>
-
   <style>
     .speakers__cards-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap:2rem;
+      gap: 2rem;
       margin: var(--space-l);
     }
-  .speakers__card{
-  background: rgb(239,140,64);
-background: radial-gradient(circle, rgba(239,140,64,1) 3%, rgba(234,105,103,1) 48%, rgba(246,174,151,1) 87%);
-display: grid;
-  }
+    .speakers__card {
+      background: rgb(239, 140, 64);
+      background: radial-gradient(
+        circle,
+        rgba(239, 140, 64, 1) 3%,
+        rgba(234, 105, 103, 1) 48%,
+        rgba(246, 174, 151, 1) 87%
+      );
+      display: grid;
+    }
 
-  .hidden-element {
-    display: none;
-  }
- 
-    </style>
- 
-<ul class="speakers__cards-list speakers__cards-list--copenhagen">
-  {location1Speakers.map(speaker => (
-   <SpeakerSmallCard speaker={speaker} />
-  ))}
-</ul>
+    .hidden-element {
+      display: none;
+    }
+  </style>
 
-<ul class="speakers__cards-list speakers__cards-list--oslo hidden-element">
-  {location2Speakers.map(speaker => (
-  <SpeakerSmallCard speaker={speaker} />
-  ))}
-</ul>
+  <ul class="speakers__cards-list speakers__cards-list--copenhagen">
+    {location1Speakers.map((speaker) => <SpeakerSmallCard speaker={speaker} />)}
+  </ul>
 
-         <script>
+  <ul class="speakers__cards-list speakers__cards-list--oslo hidden-element">
+    {location2Speakers.map((speaker) => <SpeakerSmallCard speaker={speaker} />)}
+  </ul>
+
+  <script>
     import "../scripts/buttonSpeakers.js";
   </script>
+</div>

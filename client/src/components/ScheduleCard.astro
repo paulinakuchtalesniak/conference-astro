@@ -1,5 +1,5 @@
 ---
-// import '../styles/global.css';
+import { Image } from "astro:assets";
 const { speaker } = Astro.props;
 import { formatTag, formatTime } from "../scripts/formatters.js";
 const baseUrl = `${import.meta.env.BASE_URL}`;
@@ -173,13 +173,17 @@ const baseUrl = `${import.meta.env.BASE_URL}`;
     </p>
   </div>
   <div class="speaker__data-img">
-    <a href={`/speakers/${speaker.id}`}>
-      <img
+    <a href={`${baseUrl}/speakers/${speaker.id}`}>
+      <Image
         class="schedule__speaker-img"
-        src={`${baseUrl}${import.meta.env.STRAPI_URL}${
-          speaker.attributes.photo.data[0].attributes.url
+        src={`${import.meta.env.STRAPI_URL}${
+          speaker.attributes.photo?.data[0].attributes.url
         }`}
         alt={`Photo of ${speaker.attributes.name}`}
+        width="400"
+        height="400"
+        widths={[250, 350, 500, 750]}
+        sizes="(max-width: 35em) 70vw, (max-width: 50em) 60vw, 30vw"
       />
     </a>
   </div>

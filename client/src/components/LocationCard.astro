@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 const { locations } = Astro.props;
 ---
 
@@ -48,15 +49,19 @@ const { locations } = Astro.props;
 <div class="locations__wrapper">
   <ul class="locations-list">
     {
-      locations.map((location, index) => (
+      locations.map((location) => (
         <article class="locations_article">
           <div class="locations-list__img-wrapper">
-            <img
-              class="locations-list__img"
+            <Image
+              class="locations_article"
               src={`${import.meta.env.STRAPI_URL}${
                 location.attributes.photo.data[0].attributes.url
               }`}
               alt={`Photo of ${location.attributes.name}`}
+              width="600"
+              height="700"
+              widths={[250, 350, 500, 750]}
+              sizes="(max-width: 35em) 70vw, (max-width: 50em) 60vw, 30vw"
             />
           </div>
           <div class="locations-list__data-wrapper">
