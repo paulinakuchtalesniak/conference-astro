@@ -17,15 +17,15 @@ const { tickets } = Astro.props;
 
 
     <ul>
-      {ticket.attributes.description.map((descItem, descIndex) => (
+      {ticket.attributes.description.map((descItem) => (
         <li>
-          {descItem.children.map((child, childIndex) => (
+          {descItem.children.map((child) => (
             <span>{child.text}</span>
           ))}
         </li>
       ))}
     </ul>
-    <p> {ticket.attributes.locations.data[0].attributes.name}</p>
+   <p> {ticket.attributes.locations.data[0].attributes.name}</p>
 
  </li>
   ))}

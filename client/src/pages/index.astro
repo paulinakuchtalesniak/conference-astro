@@ -1,143 +1,116 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Statistics from "../components/Statistics.astro";
+import SpeakerHeader from "../components/SpeakerHeader.astro";
+import Tickets from "../components/Tickets.astro";
 
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Statistics from '../components/Statistics.astro';
-import SpeakerHeader from '../components/SpeakerHeader.astro';
-import Tickets from '../components/Tickets.astro';
-
-import fetchApi from '../lib/strapi';
+import fetchApi from "../lib/strapi";
 const pageTitle = "Home Page";
 
 const speakers = await fetchApi({
   endpoint: "speakers",
   wrappedByKey: "data",
-   query: {
-    populate: ["photo","location", "tags"],
-    
+  query: {
+    populate: ["photo", "location", "tags"],
   },
-
 });
 const tickets = await fetchApi({
   endpoint: "tickets",
   wrappedByKey: "data",
   query: {
     populate: ["locations"],
-    
   },
 });
-
-const tags = await fetchApi({
-    endpoint: "tags",
-    wrappedByKey: "data",
-    query: {
-     populate: ["speakers"],
-    
-  },
-
- 
-  });
-    console.log(tags[2].attributes.speakers.data[0].attributes.name);
-
 ---
 
 <style>
-  .about-conference{
-    margin:  calc(var(--space-3xl)*1.5) 0;
-    margin-left: var( --space-xl);
+  .about-conference {
+    margin: calc(var(--space-3xl) * 1.5) 0;
+    margin-left: var(--space-xl);
     display: grid;
     grid-template-columns: 50% 50%;
     overflow: hidden;
     min-height: 60vh;
-
   }
-  .about-conference__heading{
-     font-size:var(--step-4);
-        color: rgb(162, 61, 61);
-            font-weight: 500;
-            margin-bottom: var(--space-m);
+  .about-conference__heading {
+    text-align: left;
+    margin-bottom: var(--space-m);
   }
-  .about__wrapper{
+  .about__wrapper {
     grid-column: 1;
     grid-row: 1;
     align-self: center;
   }
-  .about__img{
-    height: 100%;
-      grid-row: 1;
-      grid-column: 2;
-      aspect-ratio: 2/1;
-      margin-left: var(--space-m);
-        border-top-left-radius: 30rem;
-  border-bottom-left-radius: 30rem;
-  
-    
-  }
-  .about-conference__paragraph{
-    font-size: var(--step-0);
-    padding-right: var( --space-xl);
-  }
-
-  .about-speakers__heading{
-      font-size:var(--step-4);
-        color: rgb(162, 61, 61);
-            font-weight: 500;
-    text-align: center;
-      padding: var( --space-m) 0  var( --space-xl) 0;
-  }
-  .buttons-speakers__wrapper{
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-    @media screen and (max-width: 900px) {
-        .about-conference{
-    margin-left: var( --space-m);
-    display: grid; 
-    grid-template-columns: 50% 50%;
-     
-
-  }
-  .about__wrapper {
-    grid-column: 1/3;
-    grid-row: 1;
-      margin-bottom: var(--space-m);
-  }
   .about__img {
-    grid-column: 1/3;
-    grid-row: 2;
-      margin-left: 0;
-  
-
+    height: 100%;
+    grid-row: 1;
+    grid-column: 2;
+    aspect-ratio: 2/1;
+    margin-left: var(--space-m);
+    border-top-left-radius: 30rem;
+    border-bottom-left-radius: 30rem;
+  }
+  .about-conference__paragraph {
+    font-size: var(--step-0);
+    padding-right: var(--space-xl);
   }
 
-}
-
-
+  .about-speakers__heading {
+    padding: var(--space-m) 0 var(--space-xl) 0;
+  }
+  .buttons-speakers__wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  @media screen and (max-width: 1024px) {
+    .about-conference {
+      margin-left: var(--space-m);
+      display: grid;
+      grid-template-columns: 50% 50%;
+    }
+    .about__wrapper,
+    .about__img {
+      grid-column: 1/3;
+    }
+    .about__wrapper {
+      grid-row: 1;
+      margin-bottom: var(--space-m);
+    }
+    .about__img {
+      grid-row: 2;
+      margin-left: 0;
+    }
+  }
 </style>
 <BaseLayout pageTitle={pageTitle}>
-     <Header />
+  <Header />
   <Statistics />
-<section class="about-conference">
-  <div class="about__wrapper">
-  <h2 class="about-conference__heading">
-    About Color Aura Conference
-
-  </h2>
-  <p class="about-conference__paragraph">
-The Aura Colors Conference offers a captivating three-day exploration of aura colors and spiritual well-being. Renowned speakers lead sessions, workshops, and live demonstrations, allowing attendees to unlock the secrets of their auras for personal growth. Choose between Copenhagen and Oslo for a tailored experience. Whether you're new to auras or an enthusiast, this conference promises an immersive, enlightening journey to enhance your spiritual wellness.</p>
-  </div>
-<img class ="about__img"src="././assets/conference.jpeg" alt="">
-</section>
-<section class="speakers">
-  <h2 class="about-speakers__heading">
-    Meet the Speakers
-  </h2>
-  <div class="buttons-speakers__wrapper">
- <button class="button button__copenhagen button__active">Copenhagen</button>
-  <button class="button button__oslo">Oslo</button>
-     </div>
+  <section class="about-conference">
+    <div class="about__wrapper">
+      <h2 class="about-conference__heading">About Color Aura Conference</h2>
+      <p class="about-conference__paragraph">
+        The Aura Colors Conference offers a captivating three-day exploration of
+        aura colors and spiritual well-being. Renowned speakers lead sessions,
+        workshops, and live demonstrations, allowing attendees to unlock the
+        secrets of their auras for personal growth. Choose between Copenhagen
+        and Oslo for a tailored experience. Whether you're new to auras or an
+        enthusiast, this conference promises an immersive, enlightening journey
+        to enhance your spiritual wellness.
+      </p>
+    </div>
+    <img class="about__img" src="././assets/conference.jpeg" alt="" />
+  </section>
+  <section class="speakers">
+    <h2 class="about-speakers__heading">Meet the Speakers</h2>
+    <div class="buttons-speakers__wrapper">
+      <button class="button button__copenhagen button__active"
+        >Copenhagen</button
+      >
+      <button class="button button__oslo">Oslo</button>
+    </div>
     <SpeakerHeader speakers={speakers} />
-</section>
+  </section>
   <Tickets tickets={tickets} />
 </BaseLayout>

@@ -3,7 +3,7 @@
 import ScheduleCard from '../components/ScheduleCard.astro';
 const { speakers } = Astro.props;
 console.log(speakers[0].attributes.day.data.attributes.date);
-
+import { formatDate } from '../scripts/formatters.js';
 const location1SpeakersDay1 = speakers.filter(speaker => 
     speaker.attributes.location.data.attributes.name === 'Copenhagen Wellness Center' && 
     speaker.attributes.day.data.attributes.date === '2023-12-20');
@@ -19,10 +19,6 @@ const location2SpeakersDay1 = speakers.filter(speaker => speaker.attributes.loca
     speaker.attributes.day.data.attributes.date === '2023-12-21');
         const location2SpeakersDay3 = speakers.filter(speaker => speaker.attributes.location.data.attributes.name === 'Oslo Aura Sanctuary'  && 
     speaker.attributes.day.data.attributes.date === '2023-12-22');
-const formatDate=(dateString) =>{
-    const parts = dateString.split('-');
-    return parts[2] + '-' + parts[1] + '-' + parts[0];
-}
 ---  
   
 <style>

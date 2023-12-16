@@ -1,212 +1,198 @@
 ---
 import PrevNext from "../components/PrevNext.astro";
+import { formatTag, formatTime, formatDate } from "../scripts/formatters.js";
 const { speaker, prev, next } = Astro.props;
-
-
-    const formatTime =(timeString) => {
-    const dummyDate = '1970-01-01 ';
-    const dateTimeString = dummyDate + timeString;
-    const date = new Date(dateTimeString);
-    let hours = date.getHours();
-    const minutes = date.getMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; 
-    const paddedMinutes = minutes < 10 ? '0'+minutes : minutes;
-    return hours + ':' + paddedMinutes + ' ' + ampm;
-}
-    const formatTag=(tag)=> {
-  return tag
-    .replace(/_/g, ' ')
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ');
-}
 // const baseUrl = `${import.meta.env.BASE_URL}`
-const baseUrl = ``
+const baseUrl = ``;
+---
 
----  
 <style>
-.speaker__page {
-  margin-top: var(--space-2xl);
-display: grid;
-grid-template-columns: 15% 1fr 1fr 15%;
-}
-.speakers-page__heading{
-  grid-column: 2/4;
-grid-row: 1;
-font-size: var(--step-3);
-text-transform: uppercase;
-margin-bottom: var(--space-l);
- color: #ea6967;
- font-weight: 500;
- border-bottom: #ea6967 solid 1px;
+  .speaker__page {
+    display: grid;
+    grid-template-columns: 15% 1fr 1fr 15%;
+  }
+  .speakers-page__heading {
+    grid-column: 2/4;
+    grid-row: 1;
+    font-size: var(--step-3);
+    text-transform: uppercase;
+    margin-bottom: var(--space-l);
+    color: var(--headings-color);
+    font-weight: 500;
+    border-bottom: #ea6967 solid 1px;
+  }
+  .detail-image__wrapper {
+    grid-column: 2;
+    grid-row: 2;
+    padding: var(--space-l);
+    background-color: var(--headings-color);
+    display: grid;
+    place-items: center;
+  }
 
-}
-.detail-image__wrapper{
-grid-column: 2;
-grid-row: 2;
-padding: var(--space-l);
-background-color: #ea6967;
-display: grid;
-place-items: center;
-}
+  .detail-data__wrapper {
+    grid-column: 3;
+    grid-row: 2;
+    padding-left: var(--space-l);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-2xs);
+    background-color: #ea696743;
+    color: var(--text-color);
 
+    padding: var(--space-m) 0 var(--space-m) var(--space-l);
+  }
+  .detail-data__name {
+    font-size: var(--step-3);
+    color: #ef5a58;
+  }
+  .detail-data__speech-type {
+    padding: var(--space-2xs) var(--space-l);
+    background-color: #ea696783;
+    align-self: flex-start;
+    border-radius: var(--space-2xs);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
 
-
-
-.detail-data__wrapper{
-grid-column: 3;
-grid-row: 2;
-padding-left: var(--space-l);
-display: flex;
-flex-direction: column;
-justify-content: center;
-gap: var(--space-2xs);
-background-color: #ea696743;
-      color: rgb(57, 57, 57);
-
-      padding: var(--space-m) 0 var(--space-m) var(--space-l);
-}
-.detail-data__name{
-font-size: var(--step-3);
- color: #ef5a58;
-}
-.detail-data__speech-type{
-  padding:  var(--space-2xs) var(--space-l);
-  background-color: #ea696783;
-  align-self: flex-start;
-  border-radius: var(--space-2xs);
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-.detail-data__title{
-  font-size: var(--step-1);
-  font-weight: 500;
-  padding-top: var(--space-xs);
-  line-height: 1.4;
-      width: 90%;
-  
-
-}
-.detail-descriptions__wrapper{
- grid-column: 2/4;
-grid-row: 3; 
-      color: rgb(57, 57, 57);
-}
-.detail-date__wrapper{
-  display: flex; 
+  .detail-data__title {
+    font-size: var(--step-1);
+    font-weight: 500;
+    padding-top: var(--space-xs);
+    line-height: 1.4;
+    width: 90%;
+  }
+  .detail-descriptions__wrapper {
+    grid-column: 2/4;
+    grid-row: 3;
+    color: var(--text-color);
+  }
+  .detail-date__wrapper {
+    display: flex;
     padding-top: var(--space-2xs);
 
-  font-size: var(--step-0);
-
-}
-.detail-data__time{
- 
-  border-right: #ea6967 solid 1px;
-  padding-right: var(--space-s);
-}
-.detail-data__date{
+    font-size: var(--step-0);
+  }
+  .detail-data__time {
+    border-right: #ea6967 solid 1px;
+    padding-right: var(--space-s);
+  }
+  .detail-data__date {
     padding-left: var(--space-s);
-}
-.detail-data__duration{
+  }
+  .detail-data__duration {
     padding-top: var(--space-2xs);
     font-size: var(--step-0);
     padding-bottom: var(--space-xs);
-
     border-bottom: #ea6967 solid 1px;
+  }
 
-}
-
-.detail-location__wrapper{
-  display: flex;
-  flex-direction: column;
+  .detail-location__wrapper {
+    display: flex;
+    flex-direction: column;
     gap: var(--space-2xs);
-   align-self: flex-start;
+    align-self: flex-start;
 
-  padding-top: var(--space-2xs);
-  padding-bottom: var(--space-2xs);
-  font-size: var(--step--1);
-}
+    padding-top: var(--space-2xs);
+    padding-bottom: var(--space-2xs);
+    font-size: var(--step--1);
+  }
 
-.detail-data__tags-list{
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-}
-.detail-data__tag a{
- text-decoration: none;
-   color: rgb(47, 47, 47);
-   font-size:var(--step--1) ;
-
-}
-.detail-data__tag{
-  padding: var(--space-2xs) var(--space-xs);
-  background-color: #ea696729;
-  border-radius: var(--space-2xs);
-
-}
-.detail-descriptions__wrapper{
-  padding: var(--space-xl) var(--space-l);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-l);
-  background-color: #ea69671e;
-
-
-}
-.detail-descriptions_about{
-  font-size: var(--step-2);
-  font-weight: 500;
-  padding-bottom: var(--space-xs);
-   color: #ef5a58;
-
-}
-.detail-descriptions_about-paragraph, .detail-descriptions_about-speech{
-  width: 70%;
-  line-height: 1.5;
-}
-
+  .detail-data__tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+  .detail-data__tag a {
+    text-decoration: none;
+    color: rgb(47, 47, 47);
+    font-size: var(--step--1);
+  }
+  .detail-data__tag {
+    padding: var(--space-2xs) var(--space-xs);
+    background-color: #ea696729;
+    border-radius: var(--space-2xs);
+  }
+  .detail-descriptions__wrapper {
+    padding: var(--space-xl) var(--space-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l);
+    background-color: #ea69671e;
+  }
+  .detail-descriptions_about {
+    font-size: var(--step-2);
+    font-weight: 500;
+    padding-bottom: var(--space-xs);
+    color: #ef5a58;
+  }
+  .detail-descriptions_about-paragraph,
+  .detail-descriptions_about-speech {
+    width: 70%;
+    line-height: 1.5;
+  }
 </style>
 
 <section class="speaker__page">
   <h3 class="speakers-page__heading">About speaker</h3>
-<div class="detail-image__wrapper">
-      <img class="speakers__card-img" src={`${baseUrl}${import.meta.env.STRAPI_URL}${speaker.attributes.photo.data[0].attributes.url}`} alt={`Photo of ${speaker.attributes.name}`} />
-</div>
-      <div class="detail-data__wrapper">
-      <h4 class="detail-data__name">{speaker.attributes.name} {speaker.attributes.surname}</h4>
-           <p class="detail-data__speech-type">{speaker.attributes.speech_type.data.attributes.speech_type}</p>
-      <p class="detail-data__title">{speaker.attributes.speech_tittle}</p>
-      <div class="detail-date__wrapper">
-      <p class="detail-data__time"> {formatTime(speaker.attributes.time)}</p>
-      <p class="detail-data__date">{speaker.attributes.date}</p>
-      </div>
-         <p class="detail-data__duration">Duration: {speaker.attributes.duration}</p>
-         <div class="detail-location__wrapper">
-         <p class="detail-data__city">{speaker.attributes.location.data.attributes.name}</p> <p class="detail-data__street">{speaker.attributes.location.data.attributes.adress}</p>
-        </div>
-          <ul class="detail-data__tags-list">
-        {speaker.attributes.tags.data.map(tag => (
+  <div class="detail-image__wrapper">
+    <img
+      class="speakers__card-img"
+      src={`${baseUrl}${import.meta.env.STRAPI_URL}${
+        speaker.attributes.photo.data[0].attributes.url
+      }`}
+      alt={`Photo of ${speaker.attributes.name}`}
+    />
+  </div>
+  <div class="detail-data__wrapper">
+    <h4 class="detail-data__name">
+      {speaker.attributes.name}
+      {speaker.attributes.surname}
+    </h4>
+    <p class="detail-data__speech-type">
+      {speaker.attributes.speech_type.data.attributes.speech_type}
+    </p>
+    <p class="detail-data__title">{speaker.attributes.speech_tittle}</p>
+    <div class="detail-date__wrapper">
+      <p class="detail-data__time">{formatTime(speaker.attributes.time)}</p>
+      <p class="detail-data__date">{formatDate(speaker.attributes.date)}</p>
+    </div>
+    <p class="detail-data__duration">Duration: {speaker.attributes.duration}</p>
+    <div class="detail-location__wrapper">
+      <p class="detail-data__city">
+        {speaker.attributes.location.data.attributes.name}
+      </p>
+      <p class="detail-data__street">
+        {speaker.attributes.location.data.attributes.adress}
+      </p>
+    </div>
+    <ul class="detail-data__tags-list">
+      {
+        speaker.attributes.tags.data.map((tag) => (
           <li class="detail-data__tag">
-            <a href={`${baseUrl}/tags/${tag.attributes.tag}`}>{formatTag(tag.attributes.tag)}</a>
+            <a href={`${baseUrl}/tags/${tag.attributes.tag}`}>
+              {formatTag(tag.attributes.tag)}
+            </a>
           </li>
-        ))}
-      </ul>
-         </div>
-         <div class="detail-descriptions__wrapper">
-          <div>
-          <p class="detail-descriptions_about">About {speaker.attributes.name}</p>
-       <p class="detail-descriptions_about-paragraph">{speaker.attributes.bio[0].children[0].text}</p>
-       </div>
-        <div>
-        <p class="detail-descriptions_about">About speech</p>
-       <p class="detail-descriptions_about-speech">{speaker.attributes.speech_description[0].children[0].text}</p>
-       </div>
-       </div>
-    
-         
-          <PrevNext prev={prev} next={next} path="speakers" />
- 
+        ))
+      }
+    </ul>
+  </div>
+  <div class="detail-descriptions__wrapper">
+    <div>
+      <p class="detail-descriptions_about">About {speaker.attributes.name}</p>
+      <p class="detail-descriptions_about-paragraph">
+        {speaker.attributes.bio[0].children[0].text}
+      </p>
+    </div>
+    <div>
+      <p class="detail-descriptions_about">About speech</p>
+      <p class="detail-descriptions_about-speech">
+        {speaker.attributes.speech_description[0].children[0].text}
+      </p>
+    </div>
+  </div>
+
+  <PrevNext prev={prev} next={next} path="speakers" />
 </section>

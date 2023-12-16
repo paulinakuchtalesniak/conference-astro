@@ -3,127 +3,137 @@
 ---
 
 <style>
-   .header {
-  
-padding-top: 15vh;
-     font-family: "Bricolage Grotesque", sans-serif;
-    height: 90vh;
-      background-color: #f1f1f1;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-       grid-template-rows: 2fr 1fr 1.5fr 1fr 1fr ;
- animation: moveAndPulse 10s infinite ease-in-out;
-
-
-
-   }
-   .header__heading{
+  .header {
+    font-family: "Bricolage Grotesque", sans-serif;
+    height: 100vh;
+    background-color: #f1f1f1;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 2fr 1fr 1.5fr 1fr 1fr;
+    animation: moveAndPulse 10s infinite ease-in-out;
+  }
+  .header__heading {
     font-size: var(--step-5);
-   color: rgb(255, 223, 213);
-   font-weight: 600;
-   grid-row: 1;
-   grid-column: 1/4;
-   justify-self: center;
-   align-self: flex-end;
-   text-align: center;
-}
-.header__date{
+    color: var(--light-white);
+    font-weight: 600;
+    grid-row: 1;
+    grid-column: 1/4;
+    justify-self: center;
+    align-self: flex-end;
+    text-align: center;
+  }
+  .header__date {
     font-size: var(--step-3);
-     grid-row: 2;
-   grid-column: 1/4;
+    grid-row: 2;
+    grid-column: 1/4;
     justify-self: center;
     align-self: flex-start;
-    padding: var( --space-s) 0 0 0;
-     color: rgb(160, 66, 66);
-
-}
-.header__description{
+    padding: var(--space-s) 0 0 0;
+    color: var(--header-color);
+  }
+  .header__description {
     font-size: var(--step-0);
     line-height: 1.5;
-     grid-row: 3;
-   grid-column: 1/4;
+    grid-row: 3;
+    grid-column: 1/4;
     justify-self: center;
-     color: rgb(162, 61, 61);
+    color: rgb(162, 61, 61);
     max-width: 60ch;
     text-align: center;
-}
-.header__cta{
+  }
+  .header__cta {
     grid-row: 4;
-   grid-column: 1/4;
-     justify-self: center;
-     align-self: flex-start;
-     font-size: var(--step-1);
-     padding: var(--space-xs) var(--space-m);
-     border-radius: 2rem;
-     background-color: #ea6967;
-      color: #fbdbd0;
-      font-weight: 300;
-}
-.header__locations{
-     grid-row: 5;
-   grid-column: 1/4;
-   display: grid;
-   grid-template-columns:  47.5% 5% 47.5%;
+    grid-column: 1/4;
+    justify-self: center;
+    align-self: flex-start;
+    font-size: var(--step-0);
+    padding: var(--space-xs) var(--space-m);
+    border-radius: 2rem;
+    background-color: var(--headings-color);
+    color: var(--light-white);
+    font-weight: 300;
+  }
+  .header__locations {
+    grid-row: 5;
+    grid-column: 1/4;
+    display: grid;
+    grid-template-columns: 47.5% 5% 47.5%;
     justify-content: center;
+  }
+  .header__city {
+    font-size: var(--step-0);
+    color: var(--header-color);
+    text-transform: uppercase;
+    padding: var(--space-s) var(--space-m);
+    text-align: center;
+  }
 
-}
-.header__city{
-       font-size: var(--step-0);
-   color: rgb(162, 61, 61);
-      text-transform: uppercase;
-        padding: var(--space-s) var( --space-m);
-           text-align: center;
-}
-
-.header__city--first{
-
+  .header__city--first {
     grid-column: 1;
     justify-self: end;
-
-}
-.line {
-      justify-self: center;
-     grid-column: 2;
-     border-left: #ea6967 1px   solid;
-        height: 40%;
-}
-.header__city--second{
-  justify-self: start;
+  }
+  .line {
+    justify-self: center;
+    grid-column: 2;
+    border-left: #ea6967 1px solid;
+    height: 40%;
+  }
+  .header__city--second {
+    justify-self: start;
     grid-column: 3;
-}
-
-
-@keyframes moveAndPulse {
-  0%, 100% {
-    background: radial-gradient(circle at center, #ef8c40, #f5918f, #f6ae97, #ECD3A8);
-    background-size: 100% 100%;
-    background-position: center;
-  }
-  25% {
-    background: radial-gradient(circle at center, #ef8c40, #f5918f, #f6ae97, #ECD3A8);
-    background-size: 200% 200%;
-    background-position: 90% 90%;
-  }
-   50% {
-    background: radial-gradient(circle at center, #ef8c40, #f5918f, #f6ae97, #ECD3A8);
-    background-size: 200% 200%;
-    background-position: 10% 10%;
   }
 
-
-
-}
+  @keyframes moveAndPulse {
+    0%,
+    100% {
+      background: radial-gradient(
+        circle at center,
+        #ef8c40,
+        #f5918f,
+        #f6ae97,
+        #ecd3a8
+      );
+      background-size: 100% 100%;
+      background-position: center;
+    }
+    25% {
+      background: radial-gradient(
+        circle at center,
+        #ef8c40,
+        #f5918f,
+        #f6ae97,
+        #ecd3a8
+      );
+      background-size: 200% 200%;
+      background-position: 90% 90%;
+    }
+    50% {
+      background: radial-gradient(
+        circle at center,
+        #ef8c40,
+        #f5918f,
+        #f6ae97,
+        #ecd3a8
+      );
+      background-size: 200% 200%;
+      background-position: 10% 10%;
+    }
+  }
 </style>
 
 <header class="header">
-<h2 class="header__heading">Color Aura Conference</h2>
-<p class="header__date"> 20-22.12.2024</p>
-<p class="header__description">Discover the mysteries of color auras at the Color Aura Conference. Immerse in a tranquil Scandinavian setting for a unique journey into the human psyche and the language of color.</p>
-<p class="header__cta">Buy ticket now!</p>
-<div class="header__locations">
-<p class="header__city header__city--first">Copenhagen, Denmark</p>
-<span class="line"></span>
-<p class="header__city header__city--second">Oslo, Sweeden</p>
-</div>
+  <h2 class="header__heading">Color Aura Conference</h2>
+  <p class="header__date">20-22.12.2024</p>
+  <p class="header__description">
+    Discover the mysteries of color auras at the Color Aura Conference. Immerse
+    in a tranquil Scandinavian setting for a unique journey into the human
+    psyche and the language of color.
+  </p>
+  <p class="header__cta">Buy ticket now!</p>
+  <div class="header__locations">
+    <p class="header__city header__city--first">Copenhagen, Denmark</p>
+    <span class="line"></span>
+    <p class="header__city header__city--second">Oslo, Sweeden</p>
+  </div>
 </header>

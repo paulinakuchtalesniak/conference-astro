@@ -50,6 +50,11 @@ img {
   --space-xl: clamp(3.375rem, 3.243rem + 0.5634vw, 3.75rem);
   --space-2xl: clamp(4.5rem, 4.3239rem + 0.7512vw, 5rem);
   --space-3xl: clamp(6.75rem, 6.4859rem + 1.1268vw, 7.5rem);
+
+  --headings-color: #ea6967;
+  --text-color: rgb(57, 57, 57);
+  --light-white: #ffede7;
+  --header-color: rgb(160, 66, 66);
 }
 
 body {
@@ -60,6 +65,7 @@ body {
   line-height: 1.5;
   background-color: #fff6ee;
   position: relative;
+  color: var(--text-color);
 
 }
 
@@ -158,8 +164,12 @@ h1 {
 .tags__section,
 .fqa,
 .tags__index,
-.section__line-up {
-  padding-top: 20vh;
+.section__line-up,
+.locations__section,
+.agenda-intro__wrapper,
+.speaker__page,
+.header {
+  padding-top: 15vh;
 }
 
 .tags__index {
@@ -172,17 +182,27 @@ h1 {
 
 .tags__heading,
 .fqa__heading,
-.index__tags-heading, .heading__line-up {
-  font-size: var(--step-3);
-  font-weight: 400;
+.index__tags-heading,
+.heading__line-up,
+.locations__heading,
+.about-speakers__heading,
+.about-conference__heading,
+.agenda-intro__heading,
+.conference-number__heading {
+  font-size: var(--step-4);
+  font-weight: 500;
   color: #ea6967;
   text-align: center;
-  text-transform: uppercase;
+
 
 }
 
+.locations__section {
+  min-height: 80vh;
+}
 
-@media screen and (min-width: 768px) {
+
+@media screen and (min-width: 950px) {
   .nav-links {
     flex-wrap: wrap;
     display: flex;
