@@ -1,6 +1,6 @@
 ---
 const { speaker, lineUp } = Astro.props;
-import { formatTag } from "../scripts/formatters.js";
+import { formatTag, formatDate } from "../scripts/formatters.js";
 // const baseUrl = `${import.meta.env.BASE_URL}`
 const baseUrl = ``;
 ---
@@ -61,6 +61,21 @@ const baseUrl = ``;
   .speakers__card-type {
     align-self: center;
   }
+  .speakers__card-date {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: flex-end;
+    background-color: #fff6ee57;
+    align-self: flex-start;
+    padding: var(--space-2xs) var(--space-xs);
+    border-radius: var(--space-2xs);
+    margin: var(--space-2xs);
+  }
+  .speakers__card-link {
+    grid-column: 1;
+    grid-row: 1;
+   
+  }
 </style>
 
 {
@@ -70,7 +85,7 @@ const baseUrl = ``;
       data-date-speaker={speaker.attributes.day?.data.attributes.date}
       data-location={speaker.attributes.location?.data.attributes.name}
     >
-      <a href={`${baseUrl}/speakers/${speaker.id}`}>
+      <a class="speakers__card-link" href={`${baseUrl}/speakers/${speaker.id}`}>
         <img
           class="speakers__card-img"
           src={`${baseUrl}${import.meta.env.STRAPI_URL}${
@@ -79,6 +94,7 @@ const baseUrl = ``;
           alt={`Photo of ${speaker.attributes.name}`}
         />
       </a>
+      <p class="speakers__card-date">{formatDate(speaker.attributes.date)}</p>
       <h3 class="speakers__card-data">
         {" "}
         {speaker.attributes.name} <span class="name-divider" />{" "}

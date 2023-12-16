@@ -23,11 +23,16 @@ const speakers = await fetchApi({
     display: grid;
     grid-template-columns: 10% 1fr 10%;
   }
+  .heading__line-up{
+    grid-row: 1;
+    grid-column: 2;
+  }
 </style>
 <BaseLayout pageTitle={pageTitle}>
 
 <section class="section__line-up">
   <h2 class="heading__line-up">Line up!</h2>
+
   <Filter speakers={speakers} />
 <LineUpSpeakers speakers={speakers} />
 </section>
