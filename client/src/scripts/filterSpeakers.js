@@ -1,5 +1,4 @@
 const filterState = {
-  tag: null,
   date: "",
   locations: [],
 };

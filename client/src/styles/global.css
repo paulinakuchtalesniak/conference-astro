@@ -102,6 +102,7 @@ h1 {
 .nav-links {
   display: none;
   background-color: #ea6967;
+
   transform: translateX(100%);
   margin: 0;
   position: fixed;
@@ -123,7 +124,8 @@ h1 {
   text-decoration: none;
   font-size: var(--step-0);
   font-weight: 400;
-  border-bottom: black solid 1px;
+  color: var(--light-white);
+  border-bottom: var(--light-white) solid 1px;
   width: 80%;
 }
 
