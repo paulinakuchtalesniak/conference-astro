@@ -1,5 +1,4 @@
 ---
-import '../styles/global.css';
 const { speakers } = Astro.props;
 
 import SpeakerSmallCard from '../components/SpeakerSmallCard.astro';
@@ -26,7 +25,7 @@ display: grid;
     </style>
 
 
-<ul class="speakers__cards-list speakers__cards-list--copenhagen">
+<ul class="speakers__cards-list">
   {speakers.map(speaker => (
    <SpeakerSmallCard speaker={speaker} lineUp={true} />
   ))}

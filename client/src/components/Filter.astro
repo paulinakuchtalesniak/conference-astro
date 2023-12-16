@@ -16,7 +16,6 @@ const speechTypes = await fetchApi({
 
 const speakersTags = tags.map((tag) => tag.attributes.tag);
 const dates = days.map((day) => day.attributes.date);
-const types = days.map((day) => day.attributes.speech_type);
 const locations = speakers.map((speaker)=> speaker.attributes.location.data.attributes.name)
 const uniqueLocations = [];
 locations.forEach((location) => {
@@ -50,13 +49,13 @@ locations.forEach((location) => {
   const filterState = {
   tag: null,
   type: null,
-  date: null,
+  date: "",
   locations: [],
 };
 const setupDateTabs = () => {
   const tabs = document.querySelectorAll('.date-tab');
   tabs.forEach(tab => {
-    tab.addEventListener('click', (event) => {
+    tab.addEventListener('click', () => {
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
 
@@ -67,8 +66,10 @@ const setupDateTabs = () => {
 };
 document.querySelectorAll('input[name="locations"]').forEach(checkbox => {
     checkbox.addEventListener('change', (event) => {
+      
       const value = event.target.value;
       const checked = event.target.checked;
+      console.log(value, checked);
 
       if (checked) {
         filterState.locations.push(value);
@@ -79,13 +80,14 @@ document.querySelectorAll('input[name="locations"]').forEach(checkbox => {
       applyFilters();
     });
   });
+
 const applyFilters = () => {
   const speakers = document.querySelectorAll('.speakers__card-lineup');
 
   speakers.forEach(speaker => {
     const speakerDate = speaker.getAttribute('data-date-speaker');
     const speakerLocation = speaker.getAttribute('data-location');
-     const matchesDate = filterState.date === "" || filterState.date === speakerDate;
+    const matchesDate = filterState.date === "" || filterState.date === speakerDate; // Default to true if filterState.date is ""
     const matchesLocation = filterState.locations.length === 0 || filterState.locations.includes(speakerLocation);
 
     if (matchesDate && matchesLocation) {
@@ -97,6 +99,7 @@ const applyFilters = () => {
 };
 
 setupDateTabs();
+applyFilters();
 </script>
 
 

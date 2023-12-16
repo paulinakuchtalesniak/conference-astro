@@ -18,9 +18,10 @@ const speakers = await fetchApi({
 
 ---
 <BaseLayout pageTitle={pageTitle}>
-  <h2>Line up!</h2>
-  <Filter speakers={speakers} />
+
 <section class="section__line-up">
+  <h2 class="heading__line-up">Line up!</h2>
+  <Filter speakers={speakers} />
 <LineUpSpeakers speakers={speakers} />
 </section>
   

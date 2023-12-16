@@ -1,8 +1,8 @@
 ---
-import '../styles/global.css';
 const { speaker,lineUp } = Astro.props;
-// const date = speaker.attributes.day.data.attributes.date
-console.log( speaker)
+
+// const baseUrl = `${import.meta.env.BASE_URL}`
+const baseUrl = ``
 
 
 function formatTag(tag) {
@@ -74,8 +74,8 @@ display: grid;
   ? (
 
    <li class="speakers__card speakers__card-lineup" data-date-speaker={speaker.attributes.day?.data.attributes.date} data-location={speaker.attributes.location?.data.attributes.name}>
-        <a href={`/speakers/${speaker.id}`}>
-  <img class="speakers__card-img" src={`${import.meta.env.STRAPI_URL}${speaker.attributes.photo.data[0].attributes.url}`} alt={`Photo of ${speaker.attributes.name}`} />
+        <a href={`${baseUrl}/speakers/${speaker.id}`}>
+  <img class="speakers__card-img" src={`${baseUrl}${import.meta.env.STRAPI_URL}${speaker.attributes.photo.data[0].attributes.url}`} alt={`Photo of ${speaker.attributes.name}`} />
     </a>
     <p>{speaker.attributes.day?.data.attributes.date}</p>
       <h3 class="speakers__card-data">{speaker.attributes.name} {speaker.attributes.surname}</h3>
@@ -86,7 +86,7 @@ display: grid;
       <ul class="speakers__list-tags">
         {speaker.attributes.tags.data.map(tag => (
           <li class="speakers__tag">
-            <a href={`/tags/${tag.attributes.tag}`}>{formatTag(tag.attributes.tag)}</a>
+            <a href={`${baseUrl}/tags/${tag.attributes.tag}`}>{formatTag(tag.attributes.tag)}</a>
           </li>
         ))}
       </ul>
@@ -95,15 +95,15 @@ display: grid;
   : (
 
     <li class="speakers__card" data-speaker={speaker.attributes.name}>
-        <a href={`/speakers/${speaker.id}`}>
-      <img class="speakers__card-img" src={`${import.meta.env.STRAPI_URL}${speaker.attributes.photo.data[0].attributes.url}`} alt={`Photo of ${speaker.attributes.name}`} />
+        <a href={`${baseUrl}/speakers/${speaker.id}`}>
+      <img class="speakers__card-img" src={`${baseUrl}${import.meta.env.STRAPI_URL}${speaker.attributes.photo.data[0].attributes.url}`} alt={`Photo of ${speaker.attributes.name}`} />
         </a>
       <h3 class="speakers__card-data">{speaker.attributes.name} {speaker.attributes.surname}</h3>
       <p class="speakers__card-title">{speaker.attributes.speech_tittle}</p>
       <ul class="speakers__list-tags">
         {speaker.attributes.tags.data.map(tag => (
           <li class="speakers__tag">
-            <a href={`/tags/${tag.attributes.tag}`}>{formatTag(tag.attributes.tag)}</a>
+            <a href={`${baseUrl}/tags/${tag.attributes.tag}`}>{formatTag(tag.attributes.tag)}</a>
           </li>
         ))}
       </ul>

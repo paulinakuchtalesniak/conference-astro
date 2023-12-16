@@ -1,0 +1,37 @@
+    .fqa {
+        display: grid;
+        grid-template-columns: 30% 1fr 30%;
+            background-color: #ea696715;
+    }
+
+    .fqa__heading {
+        grid-row: 1;
+        grid-column: 2;
+        padding-bottom: var(--space-xs);
+        border-bottom: #ea6967 1px solid;
+    }
+
+    .faq-content__wrapper {
+        grid-column: 2;
+        grid-row: 2;
+        display: flex;
+        flex-direction: column;
+        margin-top: var(--space-l);
+
+
+
+    }
+
+    .faq-content__wrapper h2 {
+        font-size: var(--step-1);
+        color: #ea6967;
+        padding-bottom: var(--space-3xs);
+    }
+
+    .faq-content__wrapper p {
+        line-height: 1.4;
+        color: #282828;
+
+        font-size: var(--step--1);
+        margin-bottom: var(--space-l);
+    }

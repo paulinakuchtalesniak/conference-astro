@@ -30,8 +30,10 @@ const { tagSpeech } = Astro.props;
 ---
 
 <BaseLayout>
-   <h2>Speakers with <span>{tagSpeech.attributes.tag}</span> tag</h2>
+  <section class="tags__section">
+   <h2 class="tags__heading">Speakers with <span>{tagSpeech.attributes.tag}</span> tag</h2>
 
    <SpeakerTag tagSpeech={tagSpeech} />
+   </section>
      
 </BaseLayout>
